@@ -18,7 +18,7 @@ public class SearchAction extends Action{
     @Override
     public void execute() {
         System.out.println("Executing search action.");
-        Database.getInstance().setCurrentUserMovies(Database.getInstance().getMovies()
+        Database.getInstance().setCurrentUserMovies(Database.getInstance().getCurrentUserMovies()
                 .stream()
                 .filter(m -> m.getName().startsWith(actionInput.getStartsWith()))
                 .collect(Collectors.toCollection(ArrayList::new)));

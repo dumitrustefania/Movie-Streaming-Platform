@@ -8,6 +8,31 @@ public class Movie {
     ArrayList<String> genres, actors, countriesBanned;
     int numLikes = 0;
     int numRatings = 0;
+
+    public int getNumLikes() {
+        return numLikes;
+    }
+
+    public void setNumLikes(int numLikes) {
+        this.numLikes = numLikes;
+    }
+
+    public int getNumRatings() {
+        return numRatings;
+    }
+
+    public void setNumRatings(int numRatings) {
+        this.numRatings = numRatings;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
     double rating = 0;
     public Movie() {
     }

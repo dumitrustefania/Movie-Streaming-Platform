@@ -27,6 +27,7 @@ public class Database {
 
     private Page currentPage;
     public void addErrorOutput() {
+        System.out.println("adding error output");
         currentUser = null;
         currentUserMovies.clear();
 
@@ -38,6 +39,7 @@ public class Database {
     }
 
     public void addOutput() {
+        System.out.println("adding non-error output");
         ArrayNode outputData = Result.getInstance().getResult();
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode node = objectMapper.valueToTree(new Output(null, currentUserMovies, currentUser));

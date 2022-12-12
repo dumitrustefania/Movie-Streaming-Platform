@@ -25,7 +25,9 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        Input inputData = objectMapper.readValue(new File(args[0]), Input.class);
+        String argss = new String("checker/resources/in/basic_4.json");
+//        Input inputData = objectMapper.readValue(new File(args[0]), Input.class);
+        Input inputData = objectMapper.readValue(new File(argss), Input.class);
 
         Database database = Database.getInstance();
         database.setUsers(inputData.getUsers());
@@ -35,7 +37,6 @@ public class Main {
 
         for(ActionInput actionInput : inputData.getActions()) {
             Page currentPage = Database.getInstance().getCurrentPage();
-
             if(actionInput.getType().equals("change page")) {
                 if(!currentPage.getAllowedNextPages().contains(actionInput.getPage())) {
                     Database.getInstance().addErrorOutput();
@@ -52,6 +53,7 @@ public class Main {
                     case "login" -> currentPage.execute(new LoginAction(actionInput));
                     case "register" -> currentPage.execute(new RegisterAction(actionInput));
                     case "search" -> currentPage.execute(new SearchAction(actionInput));
+                    case "filter" -> currentPage.execute(new FilterAction(actionInput));
                 }
             }
         }
@@ -59,7 +61,7 @@ public class Main {
         ArrayNode outputData = Result.getInstance().getResult();
         ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
 //        objectWriter.writeValue(new File(args[1]), outputData);
-        objectWriter.writeValue(new File(args[0] + ".out"), outputData);
+        objectWriter.writeValue(new File(argss + ".out"), outputData);
 
     }
 }
