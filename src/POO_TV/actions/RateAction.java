@@ -15,9 +15,9 @@ public class RateAction extends Action{
         System.out.println("Executing rate action");
         User user = Database.getInstance().getCurrentUser();
         if(actionInput.getRate() <= 5
-                && Database.getInstance().getCurrentUserMovies().size() > 0
-                && user.getWatchedMovies().contains(Database.getInstance().getCurrentUserMovies().get(0))) {
-            Movie movie = Database.getInstance().getCurrentUserMovies().get(0);
+                && Database.getInstance().getCurrentMovie() != null
+                && user.getWatchedMovies().contains(Database.getInstance().getCurrentMovie())) {
+            Movie movie = Database.getInstance().getCurrentMovie();
             movie.setNumRatings(movie.getNumRatings()+1);
             movie.setSumRatings(movie.getSumRatings() + (double) actionInput.getRate());
             movie.setRating(movie.getSumRatings() / movie.getNumRatings());

@@ -12,7 +12,15 @@ import java.util.ArrayList;
 public class Database {
     private ArrayList<User> users;
     private ArrayList<Movie> movies;
+    private Movie currentMovie;
 
+    public Movie getCurrentMovie() {
+        return currentMovie;
+    }
+
+    public void setCurrentMovie(Movie currentMovie) {
+        this.currentMovie = currentMovie;
+    }
 
     public ArrayList<Movie> getCurrentUserMovies() {
         return currentUserMovies;
@@ -29,9 +37,6 @@ public class Database {
     private Page currentPage;
     public void addErrorOutput() {
         System.out.println("adding error output");
-//        currentUser = null;
-//        currentUserMovies.clear();
-//        currentPage = new UnauthenticatedHomepage();
 
         ArrayNode outputData = Result.getInstance().getResult();
         ObjectMapper objectMapper = new ObjectMapper();

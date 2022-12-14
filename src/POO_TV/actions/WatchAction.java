@@ -14,9 +14,9 @@ public class WatchAction extends Action{
     public void execute() {
         System.out.println("Executing watch action");
         User user = Database.getInstance().getCurrentUser();
-        if(Database.getInstance().getCurrentUserMovies().size() > 0
-           && user.getPurchasedMovies().contains(Database.getInstance().getCurrentUserMovies().get(0))) {
-            Movie movie = Database.getInstance().getCurrentUserMovies().get(0);
+        if(Database.getInstance().getCurrentMovie() != null
+           && user.getPurchasedMovies().contains(Database.getInstance().getCurrentMovie())) {
+            Movie movie = Database.getInstance().getCurrentMovie();
             user.getWatchedMovies().add(movie);
             Database.getInstance().addOutput();
         }

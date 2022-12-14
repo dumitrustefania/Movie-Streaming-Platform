@@ -14,14 +14,13 @@ public class LikeAction extends Action{
     public void execute() {
         System.out.println("Executing like action");
         User user = Database.getInstance().getCurrentUser();
-        if(Database.getInstance().getCurrentUserMovies().size() > 0
-                && user.getWatchedMovies().contains(Database.getInstance().getCurrentUserMovies().get(0))) {
-            Movie movie = Database.getInstance().getCurrentUserMovies().get(0);
+        if(Database.getInstance().getCurrentMovie() != null
+                && user.getWatchedMovies().contains(Database.getInstance().getCurrentMovie())) {
+            Movie movie = Database.getInstance().getCurrentMovie();
             movie.setNumLikes(movie.getNumLikes()+1);
             user.getLikedMovies().add(movie);
             Database.getInstance().addOutput();
         }
         else Database.getInstance().addErrorOutput();
-
     }
 }

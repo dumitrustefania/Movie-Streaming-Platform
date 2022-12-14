@@ -18,8 +18,8 @@ public class PurchaseAction extends Action{
     public void execute() {
         System.out.println("Executing purchase action");
 
-        if(Database.getInstance().getCurrentUserMovies().size() > 0) {
-            Movie movie = Database.getInstance().getCurrentUserMovies().get(0);
+        if(Database.getInstance().getCurrentMovie() != null) {
+            Movie movie = Database.getInstance().getCurrentMovie();
             User user = Database.getInstance().getCurrentUser();
             if(user.getCredentials().getAccountType().equals("premium")
                     && user.getNumFreePremiumMovies() > 0) {

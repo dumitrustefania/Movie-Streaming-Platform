@@ -27,21 +27,22 @@ public class ChangePageAction extends Action{
             }
             case "movies" -> {
                 Database.getInstance().setCurrentPage(new MoviesPage());
+                Database.getInstance().setCurrentMovie(null);//
                 Database.getInstance().getCurrentUser().getAllowedMovies();
                 System.out.println("dupa ce am schimbat pe pagina movies vad ca am allowed x movies:" +Database.getInstance().getCurrentUserMovies().size());
                 Database.getInstance().addOutput();
             }
             case "see details" -> {
                 System.out.println("movie wanted:" + actionInput.getMovie());
-                Database.getInstance().getCurrentUser().getAllowedMovies();
-                Database.getInstance().setCurrentPage(new SeeDetailsPage());
+
                 for(Movie movie : Database.getInstance().getCurrentUserMovies())
                     if (movie.getName().equals(actionInput.getMovie())) {
                         Database.getInstance().setCurrentUserMovies(new ArrayList<Movie>(List.of(movie)));
+                        Database.getInstance().setCurrentMovie(movie);
                         Database.getInstance().addOutput();
+                        Database.getInstance().setCurrentPage(new SeeDetailsPage());
                         return;
                 }
-                Database.getInstance().getCurrentUserMovies().clear();
                 Database.getInstance().addErrorOutput();
             }
             case "upgrades" -> Database.getInstance().setCurrentPage(new UpgradesPage());

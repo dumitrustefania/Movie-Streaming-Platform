@@ -25,7 +25,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        String argss = new String("checker/resources/in/basic_10.json");
+        String argss = new String("checker/resources/in/basic_8.json");
         Input inputData = objectMapper.readValue(new File(args[0]), Input.class);
 //        Input inputData = objectMapper.readValue(new File(argss), Input.class);
         ArrayNode outputData = Result.getInstance().getResult().removeAll();
