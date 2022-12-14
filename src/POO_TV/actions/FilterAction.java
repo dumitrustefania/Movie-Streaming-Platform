@@ -18,21 +18,9 @@ public class FilterAction extends Action{
     public void execute() {
         System.out.println("Executing filter action.");
         FilterInput filters = actionInput.getFilters();
-        if(filters.getSort() != null) {
-            if(filters.getSort().getDuration() != null)
-                Database.getInstance().setCurrentUserMovies(Database.getInstance().getCurrentUserMovies()
-                        .stream()
-                        .sorted(new Comparator<Movie>() {
-                            @Override
-                            public int compare(Movie o1, Movie o2) {
-                                if(filters.getSort().getDuration().equals("increasing"))
-                                    return Integer.compare(o1.getDuration(), o2.getDuration());
-                                else
-                                    return Integer.compare(o2.getDuration(), o1.getDuration());
-                            }
-                        })
-                        .collect(Collectors.toCollection(ArrayList::new)));
+        Database.getInstance().getCurrentUser().getAllowedMovies();
 
+        if(filters.getSort() != null) {
             if(filters.getSort().getRating() != null)
                 Database.getInstance().setCurrentUserMovies(Database.getInstance().getCurrentUserMovies()
                         .stream()
@@ -46,13 +34,49 @@ public class FilterAction extends Action{
                             }
                         })
                         .collect(Collectors.toCollection(ArrayList::new)));
+
+            if(filters.getSort().getDuration() != null)
+                Database.getInstance().setCurrentUserMovies(Database.getInstance().getCurrentUserMovies()
+                        .stream()
+                        .sorted(new Comparator<Movie>() {
+                            @Override
+                            public int compare(Movie o1, Movie o2) {
+                                if(filters.getSort().getDuration().equals("increasing"))
+                                    return Integer.compare(o1.getDuration(), o2.getDuration());
+                                else
+                                    return Integer.compare(o2.getDuration(), o1.getDuration());
+                            }
+                        })
+                        .collect(Collectors.toCollection(ArrayList::new)));
         }
 
-//        if(filters.getContains() != null) {
-//
-//        }
+        if(filters.getContains() != null) {
+            if(filters.getContains().getActors() != null)
+                Database.getInstance().setCurrentUserMovies(new ArrayList<Movie>(
+                        Database.getInstance().getCurrentUserMovies()
+                                .stream()
+                                .filter(m -> {
+                                    boolean containsAllActors = true;
+                                    for(String actor: actionInput.getFilters().getContains().getActors())
+                                        if(!m.getActors().contains(actor))
+                                            containsAllActors = false;
+                                    return containsAllActors;
+                                    })
+                                .collect(Collectors.toCollection(ArrayList::new))));
 
-
+            if(filters.getContains().getGenre() != null)
+                Database.getInstance().setCurrentUserMovies(new ArrayList<Movie>(
+                        Database.getInstance().getCurrentUserMovies()
+                                .stream()
+                                .filter(m -> {
+                                    boolean containsAllGenres = true;
+                                    for(String genre: actionInput.getFilters().getContains().getGenre())
+                                        if(!m.getGenres().contains(genre))
+                                            containsAllGenres = false;
+                                    return containsAllGenres;
+                                })
+                                .collect(Collectors.toCollection(ArrayList::new))));
+        }
         Database.getInstance().addOutput();
     }
 }

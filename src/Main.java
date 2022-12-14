@@ -25,9 +25,10 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        String argss = new String("checker/resources/in/basic_4.json");
-//        Input inputData = objectMapper.readValue(new File(args[0]), Input.class);
-        Input inputData = objectMapper.readValue(new File(argss), Input.class);
+        String argss = new String("checker/resources/in/basic_10.json");
+        Input inputData = objectMapper.readValue(new File(args[0]), Input.class);
+//        Input inputData = objectMapper.readValue(new File(argss), Input.class);
+        ArrayNode outputData = Result.getInstance().getResult().removeAll();
 
         Database database = Database.getInstance();
         database.setUsers(inputData.getUsers());
@@ -54,14 +55,19 @@ public class Main {
                     case "register" -> currentPage.execute(new RegisterAction(actionInput));
                     case "search" -> currentPage.execute(new SearchAction(actionInput));
                     case "filter" -> currentPage.execute(new FilterAction(actionInput));
+                    case "purchase" -> currentPage.execute(new PurchaseAction(actionInput));
+                    case "watch" -> currentPage.execute(new WatchAction(actionInput));
+                    case "like" -> currentPage.execute(new LikeAction(actionInput));
+                    case "rate" -> currentPage.execute(new RateAction(actionInput));
+                    case "buy premium account" -> currentPage.execute(new BuyPremiumAction(actionInput));
+                    case "buy tokens" -> currentPage.execute(new BuyTokensAction(actionInput));
                 }
             }
         }
 
-        ArrayNode outputData = Result.getInstance().getResult();
         ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
-//        objectWriter.writeValue(new File(args[1]), outputData);
-        objectWriter.writeValue(new File(argss + ".out"), outputData);
+        objectWriter.writeValue(new File(args[1]), outputData);
+//        objectWriter.writeValue(new File(argss + ".out"), outputData);
 
     }
 }

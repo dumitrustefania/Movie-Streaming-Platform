@@ -2,6 +2,7 @@ package POO_TV;
 
 import POO_TV.fileio.Output;
 import POO_TV.pages.Page;
+import POO_TV.pages.UnauthenticatedHomepage;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -28,13 +29,14 @@ public class Database {
     private Page currentPage;
     public void addErrorOutput() {
         System.out.println("adding error output");
-        currentUser = null;
-        currentUserMovies.clear();
+//        currentUser = null;
+//        currentUserMovies.clear();
+//        currentPage = new UnauthenticatedHomepage();
 
         ArrayNode outputData = Result.getInstance().getResult();
         ObjectMapper objectMapper = new ObjectMapper();
 
-        JsonNode node = objectMapper.valueToTree(new Output("Error", currentUserMovies, currentUser));
+        JsonNode node = objectMapper.valueToTree(new Output("Error", new ArrayList<Movie>(), null));
         outputData.add(node);
     }
 

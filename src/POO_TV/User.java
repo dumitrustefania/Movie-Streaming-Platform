@@ -1,6 +1,7 @@
 package POO_TV;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class User {
     Credentials credentials;
@@ -73,5 +74,14 @@ public class User {
 
     public User(Credentials credentials) {
         this.credentials = credentials;
+    }
+
+    public void getAllowedMovies() {
+        Database.getInstance().setCurrentUserMovies(new ArrayList<Movie>(
+                Database.getInstance().getMovies()
+                        .stream()
+                        .filter(m -> !m.getCountriesBanned().contains(
+                                Database.getInstance().getCurrentUser().getCredentials().getCountry()))
+                        .collect(Collectors.toCollection(ArrayList::new))));
     }
 }

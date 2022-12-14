@@ -25,10 +25,10 @@ public class LoginAction extends Action{
                 Database.getInstance().setCurrentUser(user);
                 Database.getInstance().setCurrentPage(new AuthenticatedHomepage());
                 Database.getInstance().addOutput();
-                System.out.println("Login cu succes");
+                System.out.println("Login cu succes "+ actionInput.getCredentials().getName());
                 return;
             }
-        System.out.println("Login fail");
+        System.out.println("Login fail "+ actionInput.getCredentials().getName());
         Database.getInstance().addErrorOutput();
         Database.getInstance().setCurrentPage(new UnauthenticatedHomepage());
     }

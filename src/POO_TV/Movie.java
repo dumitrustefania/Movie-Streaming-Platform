@@ -1,5 +1,8 @@
 package POO_TV;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.util.ArrayList;
 
 public class Movie {
@@ -8,6 +11,16 @@ public class Movie {
     ArrayList<String> genres, actors, countriesBanned;
     int numLikes = 0;
     int numRatings = 0;
+    @JsonIgnore
+    double sumRatings = 0;
+
+    public double getSumRatings() {
+        return sumRatings;
+    }
+
+    public void setSumRatings(double sumRatings) {
+        this.sumRatings = sumRatings;
+    }
 
     public int getNumLikes() {
         return numLikes;
