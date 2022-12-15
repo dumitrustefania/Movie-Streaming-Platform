@@ -2,14 +2,14 @@ package platform.actions;
 
 import platform.fileio.ActionInput;
 
-public abstract class Action {
+public abstract class ActionStrategy {
     protected ActionInput actionInput;
 
-    public Action(final ActionInput actionInput) {
+    public ActionStrategy(final ActionInput actionInput) {
         this.actionInput = actionInput;
     }
 
-    public Action() {
+    public ActionStrategy() {
     }
 
     /**

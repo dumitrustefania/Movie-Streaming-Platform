@@ -5,9 +5,9 @@ import platform.database.Movie;
 import platform.database.User;
 import platform.fileio.ActionInput;
 
-public final class RateAction extends Action {
+public final class RateActionStrategy extends ActionStrategy {
     public static final int MAX_RATE = 5;
-    public RateAction(final ActionInput actionInput) {
+    public RateActionStrategy(final ActionInput actionInput) {
         super(actionInput);
     }
 

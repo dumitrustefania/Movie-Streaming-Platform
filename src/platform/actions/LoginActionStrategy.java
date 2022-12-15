@@ -9,8 +9,8 @@ import platform.pages.UnauthenticatedHomepage;
 
 import java.util.ArrayList;
 
-public final class LoginAction extends Action {
-    public LoginAction(final ActionInput actionInput) {
+public final class LoginActionStrategy extends ActionStrategy {
+    public LoginActionStrategy(final ActionInput actionInput) {
         super(actionInput);
     }
 

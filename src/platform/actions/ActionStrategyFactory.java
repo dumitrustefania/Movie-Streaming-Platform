@@ -2,52 +2,52 @@ package platform.actions;
 
 import platform.fileio.ActionInput;
 
-public class ActionFactory {
+public class ActionStrategyFactory {
     /**
      * Helps to create the factory design pattern, instantiating
      * the needed Action subclass depending on the input.
      * @param actionInput the current action given in input
      * @return an Action subclass
      */
-    public static Action createAction(final ActionInput actionInput) {
+    public static ActionStrategy createAction(final ActionInput actionInput) {
         switch (actionInput.getType()) {
             case "on page" : {
                 switch (actionInput.getFeature()) {
                     case "login" -> {
-                        return new LoginAction(actionInput);
+                        return new LoginActionStrategy(actionInput);
                     }
                     case "register" -> {
-                        return new RegisterAction(actionInput);
+                        return new RegisterActionStrategy(actionInput);
                     }
                     case "search" -> {
-                        return new SearchAction(actionInput);
+                        return new SearchActionStrategy(actionInput);
                     }
                     case "filter" -> {
-                        return new FilterAction(actionInput);
+                        return new FilterActionStrategy(actionInput);
                     }
                     case "purchase" -> {
-                        return new PurchaseAction(actionInput);
+                        return new PurchaseActionStrategy(actionInput);
                     }
                     case "watch" -> {
-                        return new WatchAction(actionInput);
+                        return new WatchActionStrategy(actionInput);
                     }
                     case "like" -> {
-                        return new LikeAction(actionInput);
+                        return new LikeActionStrategy(actionInput);
                     }
                     case "rate" -> {
-                        return new RateAction(actionInput);
+                        return new RateActionStrategy(actionInput);
                     }
                     case "buy premium account" -> {
-                        return new BuyPremiumAction(actionInput);
+                        return new BuyPremiumActionStrategy(actionInput);
                     }
                     case "buy tokens" -> {
-                        return new BuyTokensAction(actionInput);
+                        return new BuyTokensActionStrategy(actionInput);
                     }
                     default -> throw new IllegalStateException("Unexpected value");
                 }
             }
             case "change page" :
-                return new ChangePageAction(actionInput);
+                return new ChangePageActionStrategy(actionInput);
             default:
                 throw new IllegalStateException("Unexpected value");
         }

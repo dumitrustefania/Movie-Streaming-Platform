@@ -5,8 +5,8 @@ import platform.database.Movie;
 import platform.database.User;
 import platform.fileio.ActionInput;
 
-public final class PurchaseAction extends Action {
-    public PurchaseAction(final ActionInput actionInput) {
+public final class PurchaseActionStrategy extends ActionStrategy {
+    public PurchaseActionStrategy(final ActionInput actionInput) {
         super(actionInput);
     }
 

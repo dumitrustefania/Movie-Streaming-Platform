@@ -6,8 +6,8 @@ import platform.fileio.ActionInput;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-public final class SearchAction extends Action {
-    public SearchAction(final ActionInput actionInput) {
+public final class SearchActionStrategy extends ActionStrategy {
+    public SearchActionStrategy(final ActionInput actionInput) {
         super(actionInput);
     }
 

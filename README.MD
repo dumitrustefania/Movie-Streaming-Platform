@@ -1,165 +1,119 @@
 # MOVIE STREAMING PLATFORM
 
 322CA - Bianca Ștefania Dumitru \
-Object Oriented Programming Course
+Object Oriented Programming Project, Stage #1
 
 December 2022
 ----------------------------------------------------------------------------------------------------
 
-* Gwent Stone
-    -  the program is an implementation of a game created by combining the Gwent
-       and HearttStone gameplay
-    -  2 players are competing against each other by using their cards'
-       various abilities
+* Movie Streaming Platform
+    -  the program is an implementation of a movie streaming platform,
+       such as Netflix, HBO Max or Disney+
+    -  it stores a database with all the users registered on the platform,
+       the movies that can be watched and details about them
+    -  it reads input and prints output using the JSON format
+    -  it is a file system tree-like structure: while being on a page,
+       a user can move to another page or execute certain actions.
 
-__Classes__
+__Packages structure__
 
-`fileio`
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- CardInput -> contains fields that define a card, like mana, health, name,
-               attack damage, etc.
-- Coordinates -> contains x & y coordinates (for specifying a certain card
-                 on the table)
-- ActionsInput -> contains fields that define a required action, like the
-                  command name, player index, etc
-- DecksInput -> contains fields that define a player's decks
-- StartGameInput -> contains fields that define the characteristics of a match,
-                    like a player's hero or deck
-- GameInput -> contains a StartGameInput field and an array of ActionsInput
-- Input -> main input class, used to extract the input data from every JSON file
-        -> contains a couple of DecksInput deck sets and a GameInput field
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 `main`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Main -> the main program where the test files are opened the output tests 
-          are created and then every test is checked by the checker
+- Main -> the main program where the test input files are opened and the
+          output file is created and populated
+       -> for every test, the Main class calls certain methods to initiate
+          the new database and execute the required actions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-`game`
+`fileio`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Game -> used as the starting point of the game
-       -> initialises the 2 players by assigning them their decks
-       -> creates the matches and starts them one by one 
-                
-- Match -> used as the starting point of a match
-        -> starts the match by assigning the decks for this match
-           and shuffling them
-        -> plays the game turn by turn, following the actions given as input
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-`players`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Player -> contains all the necessary data about a player
-         -> performs certain player specific methods, like adding a card in
-            hand or reinitialising the player at the start of a match
+- SortInput -> defines the required sorting type (increasing or decreasing),
+               depending on the rating or duration of a movie
+- ContainsInput -> defines the required filters for movies: based on
+                   the actors playing or the movie's genres
+- FilterInput -> contains fields that define the required sorting
+                 and filtering preferences
+- ActionInput -> contains fields that define the characteristics of an
+                 actionStrategy, such as type, feature and other specific fields
+- Input -> main input class, used to extract the input data from every JSON file
+        -> contains 3 arrays: users, movies and actions
+- Output -> contains fields required in the output file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-`table`
+`database`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Table -> the actual table where the cards are put
-        -> contains helper methods for accessing and modifying the cards 
-           on the table
+- Movie -> contains fields related to a specific movie
+
+- Credentials -> contains the the credentials of an user
+
+- User -> contains basic user information that has to be present in output
+
+- Database -> implemented as a Singleton using eager instantiation
+           -> stores all the important information about the current state
+              of the game: users, movies, current user, current movie(s),
+              current page 
+       
+- Result -> implemented as a Singleton using eager instantiation
+         -> contains an ArrayNode field the stores the output that
+            will be transformed into JSON when all actions end
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-`actions`
+`pages`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Action -> class used to create 5 different types of actions, based on
-            the command name
-         -> its children classes override the performAction() method
-         
-- DebugAction -> performs one of the debug actions, based on the
-                 command name and extra input
-
-- EnvironmentAction -> creates an object depending on the environment
-                       card's name and proceeds to use its ability
-             
-- HeroActions -> creates an object depending on the hero card's name and
-                 proceeds to use its ability
-
-- MinionAction -> performs one of the minion actions, based on the command
-                  name and extra input
-               -> the Minion card can can:
-                      --> attack an enemy card
-                      --> attack the opponent's hero
-                      --> create an object depending on the minion card's
-                          name and use its ability
-                      
-- PlayerAction -> perform the only player action: placing a card on the table                      
+- Page -> an abstract class representing a page from on the platform
+       -> contains 2 array fields (allowedActions and allowedNextPages)
+          that are populated differently for each child class
+       -> has the execute(ActionStrategy) method because a page represents
+          the context for the Strategy pattern used for executing the actions
+       -> has multiple child classes, each of them representing a different
+          page: LoginPage, RegisterPage, MoviesPage, UpgradesPage, etc.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-`abilities`
+`action`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Ability -> an interface to be used for defining card abilities
-      
-- EnvironmentAbility -> abstract class for defining an environment card ability
-                     -> classes that extend it and implement the specific ability:
-                         --> Firestorm
-                         --> HeartHound
-                         --> Winterfell
-- HeroAbility -> abstract class for defining a hero ability
-              -> classes that extend it and implement the specific ability:
-                         --> EmpressThorina
-                         --> GeneralKocioraw
-                         --> KingMudface
-                         --> LordRoyce
-                                  
-- MinionAbility -> abstract class for defining a minion card ability
-                -> classes that extend it and implement the specific ability:
-                         --> Cursed
-                         --> Disciple
-                         --> Miraj
-                         --> Ripper                            
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-`util`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Constants -> storing constants used in the implementation
-
-- JsonOut -> used for easily appending the necessary JSON values to 
-             the ArrayNode output
-          -> all its fields have the same name as the one required 
-             in the JSON output files
-          -> some integer fields have their default value -1 because
-             they should not be displayed in case they are not required
-             in the output. To do this, a special Json tag is included
-             near each field
-
-- MyIntFilter -> used for the Json tag mentioned above
-              -> filters out every integer value with the default value -1      
+- ActionStrategy -> an abstract class representing an action that has
+                    to be executed on a certain page
+                 -> has the abstract method execute(), which is defined in
+                    each of its child classes, that represent a Strategy
+                    to be executed whenever a certain action is required
+                 -> has multiple child classes, each of them representing
+                    a different action: ChangePageActionStrategy,
+                    PurchaseActionStrategy, RateActionStrategy, etc.
+                    
+- ActionStrategyFactory -> class used for the Factory design pattern
+                        -> it can create all the ActionStrategy subclasses
+                           based on the given input
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ----------------------------------------------------
 How does it work?
 
 * The Main class is the entry point of the program. It creates an
-  Input instance using the input JSON file. It also creates a Game
-  instance, that calls the playGame() method with the ArrayNode
-  output parameter. This starts the actual game.
+  Input instance using the input JSON file. It also initialises the
+  database, then starts executing the actions one by one. Initially,
+  the current page is the unauthenticated homepage.
 
-* Certain initialisations are performed in the playGame() method of
-  the Game object. It then creates a Match instance for each match that
-  has to be played, calling its startGame() method.
+* For each action, I first check whether it is a valid one.
+  If everything is fine, I use the ActionStrategyFactory that
+  know which subclass of the ActionStrategy has to be instantiated
+  based on the input.
 
-* Some more match-specific initialisations are also performed in the
-  startGame() method of the Match object. The match then takes action,
-  with the playRounds() method call.
+* After the new ActionStrategy subclass is instantiated, the current
+  page calls its execute() method, so the required action
+  gets executed.
 
-* For each player's turn, commands from the input are performed until
-  reaching the 'endPlayerTurn' command. The other player continues with
-  his commands after that.
+* For each command that requires an output, an Output object is
+  instantiated and the information about the current state of the
+  platform is added to it. It then gets appended to the result ArrayNode.
 
-* Each command is performed with the help of the Action class. It is
-  the first to process each action and redirect it to the corresponding
-  class based on its command name, by creating an instance of the respective
-  class (DebugAction / HeroAction / MinionAction etc.) and calling the
-  performAction() method.
+* After all actions are done, the Main method transforms the result
+  ArrayNode in JSON text and adds it to the resulting output file.
 
-* Each subclass of actions checks the command name and performs it
-  accordingly. Some comands, though, are different based on the card
-  type that has to execute it (the environment, hero and minion abilities).
-  For performing these special abilities, the corresponding ability
-  class is instantiated, based on the card name, and the useAbility()
-* method is called to perform the ability.
+----------------------------------------------------
 
-* For each command that requires an output, a JsonOut object is
-  instantiated and the information about the executed command is
-  added to it. It then gets appended to the overall game output.
+Design patterns
+
+* used Singleton for the Database and Result, to have a unique 
+  instance for them and be able to get them wherever needed
+
+* used Strategy to create strategies for executing each action
+
+* used Factory to instantiate action Strategies based on the input

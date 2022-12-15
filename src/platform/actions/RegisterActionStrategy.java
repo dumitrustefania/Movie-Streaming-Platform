@@ -5,8 +5,8 @@ import platform.database.User;
 import platform.fileio.ActionInput;
 import platform.pages.AuthenticatedHomepage;
 
-public final class RegisterAction extends Action {
-    public RegisterAction(final ActionInput actionInput) {
+public final class RegisterActionStrategy extends ActionStrategy {
+    public RegisterActionStrategy(final ActionInput actionInput) {
         super(actionInput);
     }
 

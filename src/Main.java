@@ -4,7 +4,7 @@ import platform.database.Result;
 import platform.fileio.ActionInput;
 import platform.fileio.Input;
 import platform.pages.Page;
-import platform.actions.ActionFactory;
+import platform.actions.ActionStrategyFactory;
 import platform.pages.UnauthenticatedHomepage;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -40,7 +40,7 @@ public class Main {
             /* Use the action factory to create the necessary action class and
                call execute() method, using the strategy pattern to
                execute each required subclass of the Action class. */
-            currentPage.execute(ActionFactory.createAction(actionInput));
+            currentPage.execute(ActionStrategyFactory.createAction(actionInput));
         }
     }
 

@@ -4,10 +4,10 @@ import platform.database.Database;
 import platform.database.User;
 import platform.fileio.ActionInput;
 
-public final class BuyPremiumAction extends Action {
+public final class BuyPremiumActionStrategy extends ActionStrategy {
     public static final int PREMIUM_ACCOUNT_PRICE = 10;
 
-    public BuyPremiumAction(final ActionInput actionInput) {
+    public BuyPremiumActionStrategy(final ActionInput actionInput) {
         super(actionInput);
     }
     @Override

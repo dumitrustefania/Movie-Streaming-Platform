@@ -8,8 +8,8 @@ import platform.pages.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class ChangePageAction extends Action {
-    public ChangePageAction(final ActionInput actionInput) {
+public final class ChangePageActionStrategy extends ActionStrategy {
+    public ChangePageActionStrategy(final ActionInput actionInput) {
         super(actionInput);
     }
 

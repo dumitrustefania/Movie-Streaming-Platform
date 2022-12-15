@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.stream.Collectors;
 
-public final class FilterAction extends Action {
-    public FilterAction(final ActionInput actionInput) {
+public final class FilterActionStrategy extends ActionStrategy {
+    public FilterActionStrategy(final ActionInput actionInput) {
         super(actionInput);
     }
 

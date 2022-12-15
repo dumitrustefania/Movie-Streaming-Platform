@@ -1,6 +1,6 @@
 package platform.pages;
 
-import platform.actions.Action;
+import platform.actions.ActionStrategy;
 
 import java.util.ArrayList;
 
@@ -19,10 +19,10 @@ public abstract class Page {
     /**
      * A page is the context for applying the Action strategy, using
      * the execute() method.
-     * @param action an Action subclass that executes the desired strategy
+     * @param actionStrategy an Action subclass that executes the desired strategy
      */
-    public void execute(final Action action) {
-        action.execute();
+    public void execute(final ActionStrategy actionStrategy) {
+        actionStrategy.execute();
     }
 
     public final ArrayList<String> getAllowedActions() {

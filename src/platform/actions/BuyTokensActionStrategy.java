@@ -4,8 +4,8 @@ import platform.database.Database;
 import platform.database.User;
 import platform.fileio.ActionInput;
 
-public final class BuyTokensAction extends Action {
-    public BuyTokensAction(final ActionInput actionInput) {
+public final class BuyTokensActionStrategy extends ActionStrategy {
+    public BuyTokensActionStrategy(final ActionInput actionInput) {
         super(actionInput);
     }
 
