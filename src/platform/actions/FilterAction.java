@@ -15,9 +15,11 @@ public final class FilterAction extends Action {
     }
 
     /**
-     * @param filter
+     * Sort the movies list by rating value, either in increasing
+     * or decreasing order, depending on the requirements.
+     * @param filter required filters
      */
-    public void sortByMovie(final FilterInput filter) {
+    public void sortByRating(final FilterInput filter) {
         Database.getInstance().setCurrentUserMovies(Database.getInstance().getCurrentUserMovies()
                 .stream()
                 .sorted(new Comparator<Movie>() {
@@ -34,9 +36,11 @@ public final class FilterAction extends Action {
     }
 
     /**
-     * @param filter
+     * Sort the movies list by duration time value, either in increasing
+     * or decreasing order, depending on the requirements.
+     * @param filter required filters
      */
-    public void sortByRating(final FilterInput filter) {
+    public void sortByDuration(final FilterInput filter) {
         Database.getInstance().setCurrentUserMovies(Database.getInstance().getCurrentUserMovies()
                 .stream()
                 .sorted(new Comparator<Movie>() {
@@ -53,7 +57,9 @@ public final class FilterAction extends Action {
     }
 
     /**
-     * @param genres
+     * Filter the movies list, keeping those that have all
+     * genres required.
+     * @param genres list of required genres
      */
     public void filterByGenre(final ArrayList<String> genres) {
         Database.getInstance().setCurrentUserMovies(new ArrayList<Movie>(
@@ -74,7 +80,9 @@ public final class FilterAction extends Action {
     }
 
     /**
-     * @param actors
+     * Filter the movies list, keeping those that have all
+     * actors required.
+     * @param actors list of required actors
      */
     public void filterByActor(final ArrayList<String> actors) {
         Database.getInstance().setCurrentUserMovies(new ArrayList<Movie>(
@@ -96,15 +104,15 @@ public final class FilterAction extends Action {
     @Override
     public void execute() {
         FilterInput filters = actionInput.getFilters();
-        Database.getInstance().getCurrentUser().getAllowedMovies();
+        Database.getInstance().getAllowedMovies();
 
         if (filters.getSort() != null) {
             if (filters.getSort().getRating() != null) {
-                sortByMovie(filters);
+                sortByRating(filters);
             }
 
             if (filters.getSort().getDuration() != null) {
-                sortByRating(filters);
+                sortByDuration(filters);
             }
         }
 
@@ -118,6 +126,7 @@ public final class FilterAction extends Action {
             }
         }
 
+        // Add successful output.
         Database.getInstance().addOutput();
     }
 }

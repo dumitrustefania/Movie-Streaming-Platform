@@ -14,13 +14,17 @@ public final class RateAction extends Action {
     @Override
     public void execute() {
         User user = Database.getInstance().getCurrentUser();
+
+        Movie movie = Database.getInstance().getCurrentMovie();
+        // Check whether the movie has been watched and rate <= 5.
         if (actionInput.getRate() <= MAX_RATE
-                && Database.getInstance().getCurrentMovie() != null
-                && user.getWatchedMovies().contains(Database.getInstance().getCurrentMovie())) {
-            Movie movie = Database.getInstance().getCurrentMovie();
+                && movie != null
+                && user.getWatchedMovies().contains(movie)) {
+            // Change the movie's rating.
             movie.setNumRatings(movie.getNumRatings() + 1);
             movie.setSumRatings(movie.getSumRatings() + (double) actionInput.getRate());
             movie.setRating(movie.getSumRatings() / movie.getNumRatings());
+            // Add movie to rated movies set of the user.
             Database.getInstance().getCurrentUser().getRatedMovies().add(movie);
             Database.getInstance().addOutput();
         } else {

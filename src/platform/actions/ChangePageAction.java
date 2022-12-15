@@ -15,20 +15,31 @@ public final class ChangePageAction extends Action {
 
     @Override
     public void execute() {
+        /* Depending on the input, change the page to the required one and
+           execute other necessary actions. */
         switch (actionInput.getPage()) {
+            // Create new login page.
             case "login" -> Database.getInstance().setCurrentPage(new LoginPage());
+            // Create new register page.
             case "register" -> Database.getInstance().setCurrentPage(new RegisterPage());
+            /* Create new unauthenticated homepage, set current user to NULL and
+               clear the list of current movies on screen. */
             case "logout" -> {
-                Database.getInstance().setCurrentUser(null);
                 Database.getInstance().setCurrentPage(new UnauthenticatedHomepage());
+                Database.getInstance().setCurrentUser(null);
                 Database.getInstance().getCurrentUserMovies().clear();
             }
+            /* Create new movies page, set current movie to NULL,
+               compute all allowed movies for current user and add output. */
             case "movies" -> {
                 Database.getInstance().setCurrentPage(new MoviesPage());
                 Database.getInstance().setCurrentMovie(null);
-                Database.getInstance().getCurrentUser().getAllowedMovies();
+                Database.getInstance().getAllowedMovies();
                 Database.getInstance().addOutput();
             }
+            /* Check whether the wanted movie exists in the list of movies currently
+               appearing on screen. If yes, set it as the current movie and create a new
+               see details page. If not, remain on the same page and add error output.*/
             case "see details" -> {
                 for (Movie movie : Database.getInstance().getCurrentUserMovies()) {
                     if (movie.getName().equals(actionInput.getMovie())) {
@@ -42,6 +53,7 @@ public final class ChangePageAction extends Action {
                 }
                 Database.getInstance().addErrorOutput();
             }
+            // Create new upgrades page.
             case "upgrades" -> Database.getInstance().setCurrentPage(new UpgradesPage());
             default -> throw new IllegalStateException("Unexpected value");
         }

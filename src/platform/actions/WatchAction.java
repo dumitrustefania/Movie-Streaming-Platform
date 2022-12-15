@@ -13,9 +13,10 @@ public final class WatchAction extends Action {
     @Override
     public void execute() {
         User user = Database.getInstance().getCurrentUser();
-        if (Database.getInstance().getCurrentMovie() != null
-                && user.getPurchasedMovies().contains(Database.getInstance().getCurrentMovie())) {
-            Movie movie = Database.getInstance().getCurrentMovie();
+        Movie movie = Database.getInstance().getCurrentMovie();
+        if (movie != null
+                && user.getPurchasedMovies().contains(movie)) {
+            // Add movie to watched movies set of the user.
             user.getWatchedMovies().add(movie);
             Database.getInstance().addOutput();
         } else {

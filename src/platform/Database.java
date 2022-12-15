@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public final class Database {
     private ArrayList<User> users;
@@ -21,12 +22,16 @@ public final class Database {
 
     private final static Database INSTANCE = new Database();
 
+    /**
+     * Singleton implementation of the database.
+     */
     public static Database getInstance() {
         return INSTANCE;
     }
 
     /**
-     *
+     * Create a new error output, transform it to JSON and
+     * append it to the output.
      */
     public void addErrorOutput() {
         ArrayNode outputData = Result.getInstance().getResult();
@@ -37,13 +42,25 @@ public final class Database {
     }
 
     /**
-     *
+     *  Create a new non-error output, transform it to JSON and
+     *  append it to the output.
      */
     public void addOutput() {
         ArrayNode outputData = Result.getInstance().getResult();
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode node = objectMapper.valueToTree(new Output(null, currentUserMovies, currentUser));
         outputData.add(node);
+    }
+
+    /**
+     * From the movie list, filter those allowed in the current user's country.
+     */
+    public void getAllowedMovies() {
+        currentUserMovies = movies
+                .stream()
+                .filter(m -> !m.getCountriesBanned().contains(
+                        currentUser.getCredentials().getCountry()))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public Movie getCurrentMovie() {

@@ -13,6 +13,10 @@ public final class SearchAction extends Action {
 
     @Override
     public void execute() {
+        /* Set the array of currently displayed movies to
+           all the movies whose names start with the given
+           prefix string. */
+
         Database.getInstance().setCurrentUserMovies(Database.getInstance().getCurrentUserMovies()
                 .stream()
                 .filter(m -> m.getName().startsWith(actionInput.getStartsWith()))

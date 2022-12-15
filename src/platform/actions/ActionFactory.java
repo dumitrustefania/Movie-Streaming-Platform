@@ -4,8 +4,10 @@ import platform.fileio.ActionInput;
 
 public class ActionFactory {
     /**
-     * @param actionInput
-     * @return
+     * Helps to create the factory design pattern, instantiating
+     * the needed Action subclass depending on the input.
+     * @param actionInput the current action given in input
+     * @return an Action subclass
      */
     public static Action createAction(final ActionInput actionInput) {
         switch (actionInput.getType()) {

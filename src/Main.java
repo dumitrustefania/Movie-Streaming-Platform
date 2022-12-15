@@ -18,11 +18,14 @@ import java.util.ArrayList;
 
 public class Main {
     /**
-     * @param inputData
+     * Execute each action given in input.
+     * @param inputData the input data parsed from input JSON
      */
     private static void executeActions(final Input inputData) {
         for (ActionInput actionInput : inputData.getActions()) {
             Page currentPage = Database.getInstance().getCurrentPage();
+
+            // Check for errors.
             if (actionInput.getType().equals("change page")
                 && !currentPage.getAllowedNextPages().contains(actionInput.getPage())) {
                     Database.getInstance().addErrorOutput();
@@ -33,12 +36,17 @@ public class Main {
                     Database.getInstance().addErrorOutput();
                     continue;
             }
+
+            /* Use the action factory to create the necessary action class and
+               call execute() method, using the strategy pattern to
+               execute each required subclass of the Action class. */
             currentPage.execute(ActionFactory.createAction(actionInput));
         }
     }
 
     /**
-     * @param inputData
+     * Initialise the platform's database with values form input.
+     * @param inputData the input data parsed from input JSON
      */
     private static void initDatabase(final Input inputData) {
         Database database = Database.getInstance();
@@ -50,6 +58,9 @@ public class Main {
 
 
     /**
+     * Main function of the platform, parses input JSON,
+     * executes all the functions of the platform
+     * and outputs results into JSON format.
      * @param args
      * @throws IOException
      */

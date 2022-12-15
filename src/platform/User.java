@@ -13,15 +13,6 @@ public final class User {
     private ArrayList<Movie> likedMovies = new ArrayList<Movie>();
     private ArrayList<Movie> ratedMovies = new ArrayList<Movie>();
 
-    public void getAllowedMovies() {
-        Database.getInstance().setCurrentUserMovies(new ArrayList<Movie>(
-                Database.getInstance().getMovies()
-                        .stream()
-                        .filter(m -> !m.getCountriesBanned().contains(Database.getInstance()
-                                .getCurrentUser().getCredentials().getCountry()))
-                        .collect(Collectors.toCollection(ArrayList::new))));
-    }
-
     public User(final Credentials credentials) {
         this.credentials = credentials;
     }
