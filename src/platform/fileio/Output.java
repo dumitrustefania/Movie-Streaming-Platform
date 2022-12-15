@@ -1,7 +1,7 @@
 package platform.fileio;
 
-import platform.Movie;
-import platform.User;
+import platform.database.Movie;
+import platform.database.User;
 
 import java.util.ArrayList;
 

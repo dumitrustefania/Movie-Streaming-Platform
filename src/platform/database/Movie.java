@@ -1,4 +1,4 @@
-package platform;
+package platform.database;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

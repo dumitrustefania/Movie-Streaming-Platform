@@ -1,7 +1,7 @@
 package platform.actions;
 
-import platform.Database;
-import platform.Movie;
+import platform.database.Database;
+import platform.database.Movie;
 import platform.fileio.ActionInput;
 import platform.pages.*;
 

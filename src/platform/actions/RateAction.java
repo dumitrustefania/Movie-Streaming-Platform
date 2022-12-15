@@ -1,8 +1,8 @@
 package platform.actions;
 
-import platform.Database;
-import platform.Movie;
-import platform.User;
+import platform.database.Database;
+import platform.database.Movie;
+import platform.database.User;
 import platform.fileio.ActionInput;
 
 public final class RateAction extends Action {

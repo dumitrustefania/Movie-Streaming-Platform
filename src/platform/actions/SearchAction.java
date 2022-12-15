@@ -1,6 +1,6 @@
 package platform.actions;
 
-import platform.Database;
+import platform.database.Database;
 import platform.fileio.ActionInput;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package platform;
+package platform.database;
 
 public final class Credentials {
     private String name, password, accountType, country, balance;

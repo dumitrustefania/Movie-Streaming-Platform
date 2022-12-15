@@ -1,6 +1,6 @@
 package platform.fileio;
 
-import platform.Credentials;
+import platform.database.Credentials;
 
 public final class ActionInput {
     private String type;

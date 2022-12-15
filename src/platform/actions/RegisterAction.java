@@ -1,7 +1,7 @@
 package platform.actions;
 
-import platform.Database;
-import platform.User;
+import platform.database.Database;
+import platform.database.User;
 import platform.fileio.ActionInput;
 import platform.pages.AuthenticatedHomepage;
 

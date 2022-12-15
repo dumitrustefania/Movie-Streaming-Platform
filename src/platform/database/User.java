@@ -1,7 +1,6 @@
-package platform;
+package platform.database;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 public final class User {
     private Credentials credentials;

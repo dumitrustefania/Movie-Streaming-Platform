@@ -1,8 +1,8 @@
 package platform.actions;
 
-import platform.Credentials;
-import platform.Database;
-import platform.User;
+import platform.database.Credentials;
+import platform.database.Database;
+import platform.database.User;
 import platform.fileio.ActionInput;
 import platform.pages.AuthenticatedHomepage;
 import platform.pages.UnauthenticatedHomepage;

@@ -1,6 +1,6 @@
-import platform.Database;
-import platform.Movie;
-import platform.Result;
+import platform.database.Database;
+import platform.database.Movie;
+import platform.database.Result;
 import platform.fileio.ActionInput;
 import platform.fileio.Input;
 import platform.pages.Page;

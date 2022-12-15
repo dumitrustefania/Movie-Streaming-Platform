@@ -1,4 +1,4 @@
-package platform;
+package platform.database;
 
 import platform.fileio.Output;
 import platform.pages.Page;

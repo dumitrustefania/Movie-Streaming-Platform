@@ -4,12 +4,9 @@ Starting audit...
 [ERROR] C:\Users\dumit\Desktop\proiect1\.\src\platform\actions\ActionFactory.java:5:1: Utility classes should not have a public or default constructor. [HideUtilityClassConstructor]
 [ERROR] C:\Users\dumit\Desktop\proiect1\.\src\platform\actions\ActionFactory.java:14:30: Avoid nested blocks. [AvoidNestedBlocks]
 [ERROR] C:\Users\dumit\Desktop\proiect1\.\src\platform\actions\ChangePageAction.java:6:22: Using the '.*' form of import should be avoided - platform.pages.*. [AvoidStarImport]
-[ERROR] C:\Users\dumit\Desktop\proiect1\.\src\platform\actions\PurchaseAction.java:17:18: '!=' is not preceded with whitespace. [WhitespaceAround]
-[ERROR] C:\Users\dumit\Desktop\proiect1\.\src\platform\Database.java:23:19: 'static' modifier out of order with the JLS suggestions. [ModifierOrder]
-[ERROR] C:\Users\dumit\Desktop\proiect1\.\src\platform\Database.java:61: Line is longer than 100 characters (found 105). [LineLength]
+[ERROR] C:\Users\dumit\Desktop\proiect1\.\src\platform\database\Database.java:23:19: 'static' modifier out of order with the JLS suggestions. [ModifierOrder]
+[ERROR] C:\Users\dumit\Desktop\proiect1\.\src\platform\database\Result.java:8:19: 'static' modifier out of order with the JLS suggestions. [ModifierOrder]
 [ERROR] C:\Users\dumit\Desktop\proiect1\.\src\platform\pages\MoviesPage.java:9: Line is longer than 100 characters (found 115). [LineLength]
-[ERROR] C:\Users\dumit\Desktop\proiect1\.\src\platform\Result.java:8:19: 'static' modifier out of order with the JLS suggestions. [ModifierOrder]
-[ERROR] C:\Users\dumit\Desktop\proiect1\.\src\platform\User.java:4:8: Unused import - java.util.stream.Collectors. [UnusedImports]
 [ERROR] C:\Users\dumit\Desktop\proiect1\.\src\Test.java:9:28: Using the '.*' form of import should be avoided - java.util.concurrent.*. [AvoidStarImport]
 Audit done.
-Checkstyle ends with 12 errors.
+Checkstyle ends with 9 errors.

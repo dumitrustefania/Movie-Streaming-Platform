@@ -1,4 +1,4 @@
-package platform;
+package platform.database;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
