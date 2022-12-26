@@ -73,6 +73,6 @@ public class Main {
         executeActions(inputData);
 
         ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
-        objectWriter.writeValue(new File(args[1]), outputData);
+        objectWriter.writeValue(new File("results.out"), outputData);
     }
 }

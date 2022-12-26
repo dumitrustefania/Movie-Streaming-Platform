@@ -48,6 +48,22 @@ public class ActionStrategyFactory {
             }
             case "change page" :
                 return new ChangePageActionStrategy(actionInput);
+            case "back":
+                return new BackActionStrategy();
+            case "subscribe":
+                return new SubscribeActionStrategy(actionInput);
+            case "database": {
+                switch (actionInput.getFeature()) {
+                    case "add" -> {
+                        return new LoginActionStrategy(actionInput);
+                    }
+                    case "delete" -> {
+                        return new RegisterActionStrategy(actionInput);
+                    }
+                    default -> throw new IllegalStateException("Unexpected value");
+                }
+            }
+
             default:
                 throw new IllegalStateException("Unexpected value");
         }

@@ -1,6 +1,7 @@
 package platform.fileio;
 
 import platform.database.Credentials;
+import platform.database.Movie;
 
 public final class ActionInput {
     private String type;
@@ -12,6 +13,9 @@ public final class ActionInput {
     private Credentials credentials;
     private int rate;
     private FilterInput filters;
+    private String subscribedGenre;
+    private Movie addedMovie;
+    private Movie deletedMovie;
 
     public int getRate() {
         return rate;
@@ -47,5 +51,17 @@ public final class ActionInput {
 
     public Credentials getCredentials() {
         return credentials;
+    }
+
+    public String getSubscribedGenre() {
+        return subscribedGenre;
+    }
+
+    public Movie getAddedMovie() {
+        return addedMovie;
+    }
+
+    public Movie getDeletedMovie() {
+        return deletedMovie;
     }
 }

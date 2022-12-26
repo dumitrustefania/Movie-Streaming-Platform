@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
 import java.util.ArrayList;
+import java.util.Stack;
 import java.util.stream.Collectors;
 
 public final class Database {
@@ -16,6 +17,7 @@ public final class Database {
     private ArrayList<Movie> currentUserMovies;
     private User currentUser;
     private Page currentPage;
+    private Stack<Page> history = new Stack<>();
 
     private Database() {
     }
@@ -109,5 +111,13 @@ public final class Database {
 
     public void setCurrentUser(final User currentUser) {
         this.currentUser = currentUser;
+    }
+
+    public Stack<Page> getHistory() {
+        return history;
+    }
+
+    public void setHistory(final Stack<Page> history) {
+        this.history = history;
     }
 }
