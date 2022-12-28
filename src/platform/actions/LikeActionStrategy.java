@@ -15,13 +15,10 @@ public final class LikeActionStrategy extends ActionStrategy {
         User user = Database.getInstance().getCurrentUser();
 
         Movie movie = Database.getInstance().getCurrentMovie();
-        // Check whether the movie has been watched.
         if (movie != null
                 && user.getWatchedMovies().contains(movie)
                 && !user.getLikedMovies().contains(movie)) {
-            // Update number of likes.
             movie.setNumLikes(movie.getNumLikes() + 1);
-            // Add movie to liked movies set of the user.
             user.getLikedMovies().add(movie);
             Database.getInstance().addOutput();
         } else {

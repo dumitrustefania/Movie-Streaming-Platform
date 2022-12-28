@@ -4,8 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
 public final class Result {
-    private final ArrayNode result;
     private final static Result INSTANCE = new Result();
+    private final ArrayNode result;
 
     /**
      * Singleton implementation of the result.

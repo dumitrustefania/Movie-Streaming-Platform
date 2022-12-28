@@ -35,7 +35,7 @@ public abstract class Page {
         return allowedNextPages;
     }
 
-    public String getName() {
+    public final String getName() {
         return name;
     }
 }

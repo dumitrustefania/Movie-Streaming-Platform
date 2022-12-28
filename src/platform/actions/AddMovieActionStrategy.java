@@ -5,7 +5,7 @@ import platform.database.Movie;
 import platform.fileio.ActionInput;
 import platform.observer.ObservableGenre;
 
-public class AddMovieActionStrategy extends ActionStrategy {
+public final class AddMovieActionStrategy extends ActionStrategy {
     public AddMovieActionStrategy(final ActionInput actionInput) {
         super(actionInput);
     }

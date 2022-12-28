@@ -24,7 +24,6 @@ public class Main {
     private static void executeActions(final Input inputData) {
         for (ActionInput actionInput : inputData.getActions()) {
             Page currentPage = Database.getInstance().getCurrentPage();
-            System.out.println(actionInput.getType() + " -> " + Database.getInstance().getCurrentPage());
             // Check for errors.
             if (actionInput.getType().equals("change page")
                     && !currentPage.getAllowedNextPages().contains(actionInput.getPage())) {
@@ -73,8 +72,7 @@ public class Main {
      */
     public static void main(final String[] args) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        Input inputData = objectMapper.readValue(new File(args[ 0 ]), Input.class);
-//        Input inputData = objectMapper.readValue(new File("C:\\Users\\dumit\\Desktop\\proiect1\\checker\\resources\\in\\basic_8.json"), Input.class);
+        Input inputData = objectMapper.readValue(new File(args[0]), Input.class);
 
         ArrayNode outputData = Result.getInstance().getResult().removeAll();
 
@@ -82,9 +80,8 @@ public class Main {
         executeActions(inputData);
 
         ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
-//        objectWriter.writeValue(new File("results.out"), outputData);
-        objectWriter.writeValue(new File(args[ 0 ] + "out"), outputData);
-        objectWriter.writeValue(new File(args[ 1 ]), outputData);
+        objectWriter.writeValue(new File(args[0] + "out"), outputData);
+        objectWriter.writeValue(new File(args[1]), outputData);
 
     }
 }

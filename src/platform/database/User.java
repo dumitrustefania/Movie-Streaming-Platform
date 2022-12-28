@@ -9,9 +9,9 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public final class User {
+    private static final int NUM_INITIAL_FREE_MOVIES = 15;
     private Credentials credentials;
     private int tokensCount;
-    private static final int NUM_INITIAL_FREE_MOVIES = 15;
     private int numFreePremiumMovies = NUM_INITIAL_FREE_MOVIES;
     private ArrayList<Movie> purchasedMovies = new ArrayList<Movie>();
     private ArrayList<Movie> watchedMovies = new ArrayList<Movie>();
@@ -21,29 +21,56 @@ public final class User {
     @JsonIgnore
     private HashMap<Movie, Integer> rateForMovie = new HashMap<>();
 
-    public void updateObserver(String movieName) {
+    public User(final Credentials credentials) {
+        this.credentials = credentials;
+    }
+
+    public User() {
+    }
+
+    /**
+     * If the new movie contains one of the genres subscribed
+     * by the user, he gets notified.
+     * @param movieName - the new movie added to the database
+     */
+    public void updateObserver(final String movieName) {
         for (Notification notification : notifications) {
-            if (notification.getMovieName().equals(movieName))
+            if (notification.getMovieName().equals(movieName)) {
                 return;
+            }
         }
 
         notifications.add(new Notification(movieName, "ADD"));
     }
 
+    /**
+     * Create a movie recommendation for the user.
+     * Steps:
+     * - making a top of the genres appreciated by the user,
+     *     by sorting them in descending order according to
+     *     the number of likes;
+     * - sorting movies from the database in descending order
+     *     according to the total number of likes;
+     * - finding the first movie in the database with the highest
+     *     number of likes that has not been seen before by
+     *     the user and which is part of the movie genre most
+     *     appreciated by him;
+     */
     public void createRecommendation() {
         HashMap<String, Integer> likedGenres = new HashMap<>();
         for (Movie movie : likedMovies) {
             for (String genre : movie.getGenres()) {
-                if (!likedGenres.containsKey(genre))
+                if (!likedGenres.containsKey(genre)) {
                     likedGenres.put(genre, 1);
-                else
+                } else {
                     likedGenres.put(genre, likedGenres.get(genre) + 1);
+                }
             }
         }
 
-        ArrayList<Map.Entry<String, Integer>> likedGenresList = new ArrayList<>(likedGenres.entrySet());
+        ArrayList<Map.Entry<String, Integer>> likedGenresList =
+                new ArrayList<>(likedGenres.entrySet());
 
-        // Sort the Arraylist using a custom comparator.
         likedGenresList.sort((o1, o2) -> {
             if (Objects.equals(o1.getValue(), o2.getValue())) {
                 String key1 = o1.getKey();
@@ -53,10 +80,10 @@ public final class User {
 
             return Integer.compare(o1.getValue(), o2.getValue());
         });
-        System.out.println("lista genurilor" + likedGenresList);
 
         Database.getInstance().getAllowedMovies();
-        Database.getInstance().getCurrentUserMovies().sort(((o1, o2) -> Integer.compare(o2.getNumLikes(), o1.getNumLikes())));
+        Database.getInstance().getCurrentUserMovies()
+                .sort(((o1, o2) -> Integer.compare(o2.getNumLikes(), o1.getNumLikes())));
 
         AtomicBoolean foundRecommendation = new AtomicBoolean(false);
         likedGenresList.forEach(entry -> {
@@ -65,7 +92,8 @@ public final class User {
                     if (!watchedMovies.contains(movie) && !foundRecommendation.get()) {
                         for (String genre : movie.getGenres()) {
                             if (genre.equals(entry.getKey())) {
-                                notifications.add(new Notification(movie.getName(), "Recommendation"));
+                                notifications.add(new Notification(movie.getName(),
+                                        "Recommendation"));
                                 foundRecommendation.set(true);
                             }
                         }
@@ -79,13 +107,6 @@ public final class User {
         }
         Database.getInstance().setCurrentUserMovies(null);
         Database.getInstance().addOutput();
-    }
-
-    public User(final Credentials credentials) {
-        this.credentials = credentials;
-    }
-
-    public User() {
     }
 
     public int getTokensCount() {
@@ -148,7 +169,7 @@ public final class User {
         return notifications;
     }
 
-    public void setNotifications(ArrayList<Notification> notifications) {
+    public void setNotifications(final ArrayList<Notification> notifications) {
         this.notifications = notifications;
     }
 
@@ -156,7 +177,7 @@ public final class User {
         return rateForMovie;
     }
 
-    public void setRateForMovie(HashMap<Movie, Integer> rateForMovie) {
+    public void setRateForMovie(final HashMap<Movie, Integer> rateForMovie) {
         this.rateForMovie = rateForMovie;
     }
 }

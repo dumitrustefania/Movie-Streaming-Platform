@@ -41,6 +41,10 @@ public final class ActionInput {
         return page;
     }
 
+    public void setPage(final String page) {
+        this.page = page;
+    }
+
     public String getType() {
         return type;
     }
@@ -63,9 +67,5 @@ public final class ActionInput {
 
     public String getDeletedMovie() {
         return deletedMovie;
-    }
-
-    public void setPage(String page) {
-        this.page = page;
     }
 }

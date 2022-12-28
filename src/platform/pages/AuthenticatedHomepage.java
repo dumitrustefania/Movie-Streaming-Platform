@@ -11,6 +11,7 @@ public final class AuthenticatedHomepage extends Page {
         Database.getInstance().getHistory().add(this);
         this.name = "authenticated homepage";
         this.allowedActions = new ArrayList<String>(List.of());
-        this.allowedNextPages = new ArrayList<String>(List.of("movies", "upgrades", "logout", "authenticated homepage"));
+        this.allowedNextPages = new ArrayList<String>(List.of("movies", "upgrades",
+                "logout", "authenticated homepage"));
     }
 }

@@ -12,11 +12,10 @@ public final class RegisterActionStrategy extends ActionStrategy {
 
     @Override
     public void execute() {
-        // Add a new user into the database.
         User newUser = new User(actionInput.getCredentials());
         Database.getInstance().getUsers().add(newUser);
         Database.getInstance().setCurrentUser(newUser);
-        // Change the page to a new authenticated homepage.
+
         Database.getInstance().setCurrentPage(new AuthenticatedHomepage());
         Database.getInstance().addOutput();
     }

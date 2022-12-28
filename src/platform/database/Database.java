@@ -11,6 +11,7 @@ import java.util.Stack;
 import java.util.stream.Collectors;
 
 public final class Database {
+    private final static Database INSTANCE = new Database();
     private ArrayList<User> users;
     private ArrayList<Movie> movies;
     private Movie currentMovie;
@@ -21,8 +22,6 @@ public final class Database {
 
     private Database() {
     }
-
-    private final static Database INSTANCE = new Database();
 
     /**
      * Singleton implementation of the database.

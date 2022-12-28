@@ -5,7 +5,7 @@ import platform.database.Movie;
 import platform.database.User;
 import platform.fileio.ActionInput;
 
-public class DeleteMovieActionStrategy extends ActionStrategy {
+public final class DeleteMovieActionStrategy extends ActionStrategy {
     public DeleteMovieActionStrategy(final ActionInput actionInput) {
         super(actionInput);
     }
@@ -35,6 +35,7 @@ public class DeleteMovieActionStrategy extends ActionStrategy {
                 }
                 user.getPurchasedMovies().remove(deletedMovie);
             }
+
             user.getWatchedMovies().remove(deletedMovie);
             user.getLikedMovies().remove(deletedMovie);
             user.getRatedMovies().remove(deletedMovie);

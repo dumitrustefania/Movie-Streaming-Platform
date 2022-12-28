@@ -4,7 +4,7 @@ import platform.database.Database;
 import platform.fileio.ActionInput;
 import platform.observer.ObservableGenre;
 
-public class SubscribeActionStrategy extends ActionStrategy {
+public final class SubscribeActionStrategy extends ActionStrategy {
 
     public SubscribeActionStrategy(final ActionInput actionInput) {
         super(actionInput);

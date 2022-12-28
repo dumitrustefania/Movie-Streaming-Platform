@@ -131,7 +131,6 @@ public final class FilterActionStrategy extends ActionStrategy {
             }
         }
 
-        // Add successful output.
         Database.getInstance().addOutput();
     }
 }

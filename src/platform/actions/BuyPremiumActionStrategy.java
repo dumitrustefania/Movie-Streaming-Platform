@@ -14,10 +14,7 @@ public final class BuyPremiumActionStrategy extends ActionStrategy {
     @Override
     public void execute() {
         User user = Database.getInstance().getCurrentUser();
-
-        // Decrease tokens count by 10.
         user.setTokensCount(user.getTokensCount() - PREMIUM_ACCOUNT_PRICE);
-        // Set account to premium.
         user.getCredentials().setAccountType("premium");
     }
 }

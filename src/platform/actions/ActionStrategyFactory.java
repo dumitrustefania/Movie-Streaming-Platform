@@ -12,8 +12,7 @@ public class ActionStrategyFactory {
      */
     public static ActionStrategy createAction(final ActionInput actionInput) {
         switch (actionInput.getType()) {
-            case "on page": {
-                switch (actionInput.getFeature()) {
+            case "on page": switch (actionInput.getFeature()) {
                     case "login" -> {
                         return new LoginActionStrategy(actionInput);
                     }
@@ -46,15 +45,13 @@ public class ActionStrategyFactory {
                     }
                     default -> throw new IllegalStateException("Unexpected value");
                 }
-            }
             case "change page":
                 return new ChangePageActionStrategy(actionInput);
             case "back":
                 return new BackActionStrategy();
             case "subscribe":
                 return new SubscribeActionStrategy(actionInput);
-            case "database": {
-                switch (actionInput.getFeature()) {
+            case "database": switch (actionInput.getFeature()) {
                     case "add" -> {
                         return new AddMovieActionStrategy(actionInput);
                     }
@@ -63,7 +60,7 @@ public class ActionStrategyFactory {
                     }
                     default -> throw new IllegalStateException("Unexpected value");
                 }
-            }
+
             default:
                 throw new IllegalStateException("Unexpected value");
         }
