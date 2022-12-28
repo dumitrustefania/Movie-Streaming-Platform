@@ -26,9 +26,10 @@ Starting audit...
 [ERROR] C:\Users\dumit\Desktop\proiect1\.\src\platform\actions\DeleteMovieActionStrategy.java:15:5: Class 'DeleteMovieActionStrategy' looks like designed for extension (can be subclassed), but the method 'execute' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'DeleteMovieActionStrategy' final or making the method 'execute' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
 [ERROR] C:\Users\dumit\Desktop\proiect1\.\src\platform\actions\DeleteMovieActionStrategy.java:19:9: 'for' is not followed by whitespace. [WhitespaceAround]
 [ERROR] C:\Users\dumit\Desktop\proiect1\.\src\platform\actions\DeleteMovieActionStrategy.java:20:13: 'if' is not followed by whitespace. [WhitespaceAround]
-[ERROR] C:\Users\dumit\Desktop\proiect1\.\src\platform\actions\DeleteMovieActionStrategy.java:26:9: 'for' is not followed by whitespace. [WhitespaceAround]
-[ERROR] C:\Users\dumit\Desktop\proiect1\.\src\platform\actions\DeleteMovieActionStrategy.java:27:13: 'if' is not followed by whitespace. [WhitespaceAround]
-[ERROR] C:\Users\dumit\Desktop\proiect1\.\src\platform\actions\DeleteMovieActionStrategy.java:28:17: 'if' is not followed by whitespace. [WhitespaceAround]
+[ERROR] C:\Users\dumit\Desktop\proiect1\.\src\platform\actions\DeleteMovieActionStrategy.java:26:9: 'if' is not followed by whitespace. [WhitespaceAround]
+[ERROR] C:\Users\dumit\Desktop\proiect1\.\src\platform\actions\DeleteMovieActionStrategy.java:31:9: 'for' is not followed by whitespace. [WhitespaceAround]
+[ERROR] C:\Users\dumit\Desktop\proiect1\.\src\platform\actions\DeleteMovieActionStrategy.java:32:13: 'if' is not followed by whitespace. [WhitespaceAround]
+[ERROR] C:\Users\dumit\Desktop\proiect1\.\src\platform\actions\DeleteMovieActionStrategy.java:33:17: 'if' is not followed by whitespace. [WhitespaceAround]
 [ERROR] C:\Users\dumit\Desktop\proiect1\.\src\platform\actions\LoginActionStrategy.java:20: Line is longer than 100 characters (found 111). [LineLength]
 [ERROR] C:\Users\dumit\Desktop\proiect1\.\src\platform\actions\LoginActionStrategy.java:20:66: '+' is not preceded with whitespace. [WhitespaceAround]
 [ERROR] C:\Users\dumit\Desktop\proiect1\.\src\platform\actions\RateActionStrategy.java:24:13: 'if' is not followed by whitespace. [WhitespaceAround]
@@ -104,4 +105,4 @@ Starting audit...
 [ERROR] C:\Users\dumit\Desktop\proiect1\.\src\Test.java:206:65: Parameter testFileName should be final. [FinalParameters]
 [ERROR] C:\Users\dumit\Desktop\proiect1\.\src\Test.java:222: Line is longer than 100 characters (found 108). [LineLength]
 Audit done.
-Checkstyle ends with 104 errors.
+Checkstyle ends with 105 errors.

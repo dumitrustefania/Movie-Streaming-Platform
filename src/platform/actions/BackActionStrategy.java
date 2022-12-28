@@ -3,10 +3,10 @@ package platform.actions;
 import platform.database.Database;
 import platform.fileio.ActionInput;
 
-public class BackActionStrategy extends ActionStrategy{
+public class BackActionStrategy extends ActionStrategy {
     @Override
     public void execute() {
-        if(Database.getInstance().getHistory().size() <= 1) {
+        if (Database.getInstance().getHistory().size() <= 1) {
             Database.getInstance().addErrorOutput();
             return;
         }

@@ -207,7 +207,7 @@ public final class Test {
         List<String> listArgv = new ArrayList<>();
         listArgv.add(testFile.getAbsolutePath());
         listArgv.add(OUT_FILE);
-        String[] argv = new String[0];
+        String[] argv = new String[ 0 ];
         return listArgv.toArray(argv);
     }
 
@@ -220,7 +220,7 @@ public final class Test {
     }
 
     private static void printMessage(final String testFileName, final String message, final boolean trail) {
-        String fileName = testFileName.split("\\.")[0];
+        String fileName = testFileName.split("\\.")[ 0 ];
         if (trail) {
             System.out.println("[" + fileName + "]: ..................... " + message);
         } else {

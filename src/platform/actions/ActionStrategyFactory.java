@@ -6,12 +6,13 @@ public class ActionStrategyFactory {
     /**
      * Helps to create the factory design pattern, instantiating
      * the needed Action subclass depending on the input.
+     *
      * @param actionInput the current action given in input
      * @return an Action subclass
      */
     public static ActionStrategy createAction(final ActionInput actionInput) {
         switch (actionInput.getType()) {
-            case "on page" : {
+            case "on page": {
                 switch (actionInput.getFeature()) {
                     case "login" -> {
                         return new LoginActionStrategy(actionInput);
@@ -46,7 +47,7 @@ public class ActionStrategyFactory {
                     default -> throw new IllegalStateException("Unexpected value");
                 }
             }
-            case "change page" :
+            case "change page":
                 return new ChangePageActionStrategy(actionInput);
             case "back":
                 return new BackActionStrategy();

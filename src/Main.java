@@ -1,15 +1,14 @@
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import platform.actions.ActionStrategyFactory;
 import platform.database.Database;
 import platform.database.Movie;
 import platform.database.Result;
 import platform.fileio.ActionInput;
 import platform.fileio.Input;
 import platform.pages.Page;
-import platform.actions.ActionStrategyFactory;
 import platform.pages.UnauthenticatedHomepage;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,22 +18,23 @@ import java.util.ArrayList;
 public class Main {
     /**
      * Execute each action given in input.
+     *
      * @param inputData the input data parsed from input JSON
      */
     private static void executeActions(final Input inputData) {
         for (ActionInput actionInput : inputData.getActions()) {
             Page currentPage = Database.getInstance().getCurrentPage();
-            System.out.println(actionInput.getType() + " -> "+ Database.getInstance().getCurrentPage());
+            System.out.println(actionInput.getType() + " -> " + Database.getInstance().getCurrentPage());
             // Check for errors.
             if (actionInput.getType().equals("change page")
-                && !currentPage.getAllowedNextPages().contains(actionInput.getPage())) {
-                    Database.getInstance().addErrorOutput();
-                    continue;
-                }
+                    && !currentPage.getAllowedNextPages().contains(actionInput.getPage())) {
+                Database.getInstance().addErrorOutput();
+                continue;
+            }
             if (actionInput.getType().equals("on page")
-                && !currentPage.getAllowedActions().contains(actionInput.getFeature())) {
-                    Database.getInstance().addErrorOutput();
-                    continue;
+                    && !currentPage.getAllowedActions().contains(actionInput.getFeature())) {
+                Database.getInstance().addErrorOutput();
+                continue;
             }
 
             /* Use the action factory to create the necessary action class and
@@ -43,14 +43,15 @@ public class Main {
             currentPage.execute(ActionStrategyFactory.createAction(actionInput));
         }
 
-        if(Database.getInstance().getCurrentUser() != null
-           && Database.getInstance().getCurrentUser().getCredentials().getAccountType().equals("premium")) {
+        if (Database.getInstance().getCurrentUser() != null
+                && Database.getInstance().getCurrentUser().getCredentials().getAccountType().equals("premium")) {
             Database.getInstance().getCurrentUser().createRecommendation();
         }
     }
 
     /**
      * Initialise the platform's database with values form input.
+     *
      * @param inputData the input data parsed from input JSON
      */
     private static void initDatabase(final Input inputData) {
@@ -66,12 +67,13 @@ public class Main {
      * Main function of the platform, parses input JSON,
      * executes all the functions of the platform
      * and outputs results into JSON format.
+     *
      * @param args
      * @throws IOException
      */
     public static void main(final String[] args) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        Input inputData = objectMapper.readValue(new File(args[0]), Input.class);
+        Input inputData = objectMapper.readValue(new File(args[ 0 ]), Input.class);
 //        Input inputData = objectMapper.readValue(new File("C:\\Users\\dumit\\Desktop\\proiect1\\checker\\resources\\in\\basic_8.json"), Input.class);
 
         ArrayNode outputData = Result.getInstance().getResult().removeAll();
@@ -81,8 +83,8 @@ public class Main {
 
         ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
 //        objectWriter.writeValue(new File("results.out"), outputData);
-        objectWriter.writeValue(new File(args[0]+"out"), outputData);
-        objectWriter.writeValue(new File(args[1]), outputData);
+        objectWriter.writeValue(new File(args[ 0 ] + "out"), outputData);
+        objectWriter.writeValue(new File(args[ 1 ]), outputData);
 
     }
 }

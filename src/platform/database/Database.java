@@ -1,10 +1,10 @@
 package platform.database;
 
-import platform.fileio.Output;
-import platform.pages.Page;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import platform.fileio.Output;
+import platform.pages.Page;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -44,8 +44,8 @@ public final class Database {
     }
 
     /**
-     *  Create a new non-error output, transform it to JSON and
-     *  append it to the output.
+     * Create a new non-error output, transform it to JSON and
+     * append it to the output.
      */
     public void addOutput() {
         ArrayNode outputData = Result.getInstance().getResult();

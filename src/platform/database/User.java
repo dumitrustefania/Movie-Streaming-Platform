@@ -2,7 +2,10 @@ package platform.database;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public final class User {
@@ -19,8 +22,8 @@ public final class User {
     private HashMap<Movie, Integer> rateForMovie = new HashMap<>();
 
     public void updateObserver(String movieName) {
-        for(Notification notification : notifications) {
-            if(notification.getMovieName().equals(movieName))
+        for (Notification notification : notifications) {
+            if (notification.getMovieName().equals(movieName))
                 return;
         }
 
@@ -29,9 +32,9 @@ public final class User {
 
     public void createRecommendation() {
         HashMap<String, Integer> likedGenres = new HashMap<>();
-        for(Movie movie : likedMovies) {
-            for(String genre : movie.getGenres()) {
-                if(!likedGenres.containsKey(genre))
+        for (Movie movie : likedMovies) {
+            for (String genre : movie.getGenres()) {
+                if (!likedGenres.containsKey(genre))
                     likedGenres.put(genre, 1);
                 else
                     likedGenres.put(genre, likedGenres.get(genre) + 1);
@@ -57,11 +60,11 @@ public final class User {
 
         AtomicBoolean foundRecommendation = new AtomicBoolean(false);
         likedGenresList.forEach(entry -> {
-            if(!foundRecommendation.get()) {
-                for(Movie movie : Database.getInstance().getCurrentUserMovies()) {
-                    if(!watchedMovies.contains(movie) && !foundRecommendation.get()) {
-                        for(String genre : movie.getGenres()) {
-                            if(genre.equals(entry.getKey())) {
+            if (!foundRecommendation.get()) {
+                for (Movie movie : Database.getInstance().getCurrentUserMovies()) {
+                    if (!watchedMovies.contains(movie) && !foundRecommendation.get()) {
+                        for (String genre : movie.getGenres()) {
+                            if (genre.equals(entry.getKey())) {
                                 notifications.add(new Notification(movie.getName(), "Recommendation"));
                                 foundRecommendation.set(true);
                             }
@@ -71,12 +74,13 @@ public final class User {
             }
         });
 
-        if(!foundRecommendation.get()) {
+        if (!foundRecommendation.get()) {
             notifications.add(new Notification("No recommendation", "Recommendation"));
         }
         Database.getInstance().setCurrentUserMovies(null);
         Database.getInstance().addOutput();
     }
+
     public User(final Credentials credentials) {
         this.credentials = credentials;
     }

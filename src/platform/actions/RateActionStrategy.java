@@ -7,6 +7,7 @@ import platform.fileio.ActionInput;
 
 public final class RateActionStrategy extends ActionStrategy {
     public static final int MAX_RATE = 5;
+
     public RateActionStrategy(final ActionInput actionInput) {
         super(actionInput);
     }
@@ -21,7 +22,7 @@ public final class RateActionStrategy extends ActionStrategy {
                 && movie != null
                 && user.getWatchedMovies().contains(movie)) {
             // Change the movie's rating.
-            if(user.getRateForMovie().containsKey(movie)) {
+            if (user.getRateForMovie().containsKey(movie)) {
                 movie.setSumRatings(movie.getSumRatings() - (double) user.getRateForMovie().get(movie));
             } else {
                 movie.setNumRatings(movie.getNumRatings() + 1);
@@ -32,7 +33,7 @@ public final class RateActionStrategy extends ActionStrategy {
             movie.setRating(movie.getSumRatings() / movie.getNumRatings());
 
             // Add movie to rated movies set of the user.
-            if(!user.getRatedMovies().contains(movie))
+            if (!user.getRatedMovies().contains(movie))
                 user.getRatedMovies().add(movie);
 
             Database.getInstance().addOutput();

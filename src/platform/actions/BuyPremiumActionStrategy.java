@@ -10,6 +10,7 @@ public final class BuyPremiumActionStrategy extends ActionStrategy {
     public BuyPremiumActionStrategy(final ActionInput actionInput) {
         super(actionInput);
     }
+
     @Override
     public void execute() {
         User user = Database.getInstance().getCurrentUser();

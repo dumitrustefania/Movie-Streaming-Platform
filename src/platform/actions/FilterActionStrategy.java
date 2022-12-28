@@ -17,6 +17,7 @@ public final class FilterActionStrategy extends ActionStrategy {
     /**
      * Sort the movies list by rating value, either in increasing
      * or decreasing order, depending on the requirements.
+     *
      * @param filter required filters
      */
     public void sortByRating(final FilterInput filter) {
@@ -38,6 +39,7 @@ public final class FilterActionStrategy extends ActionStrategy {
     /**
      * Sort the movies list by duration time value, either in increasing
      * or decreasing order, depending on the requirements.
+     *
      * @param filter required filters
      */
     public void sortByDuration(final FilterInput filter) {
@@ -59,6 +61,7 @@ public final class FilterActionStrategy extends ActionStrategy {
     /**
      * Filter the movies list, keeping those that have all
      * genres required.
+     *
      * @param genres list of required genres
      */
     public void filterByGenre(final ArrayList<String> genres) {
@@ -82,6 +85,7 @@ public final class FilterActionStrategy extends ActionStrategy {
     /**
      * Filter the movies list, keeping those that have all
      * actors required.
+     *
      * @param actors list of required actors
      */
     public void filterByActor(final ArrayList<String> actors) {
@@ -101,6 +105,7 @@ public final class FilterActionStrategy extends ActionStrategy {
                         })
                         .collect(Collectors.toCollection(ArrayList::new))));
     }
+
     @Override
     public void execute() {
         FilterInput filters = actionInput.getFilters();

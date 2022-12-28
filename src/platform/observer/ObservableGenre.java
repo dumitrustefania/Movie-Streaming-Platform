@@ -17,16 +17,17 @@ public final class ObservableGenre {
      * Singleton implementation of the database.
      */
     public static ObservableGenre getInstance() {
-        if(INSTANCE == null)
+        if (INSTANCE == null)
             INSTANCE = new ObservableGenre();
         return INSTANCE;
     }
-    private HashMap<String , ArrayList<User>> observers = new HashMap<>();
+
+    private final HashMap<String, ArrayList<User>> observers = new HashMap<>();
 
     public void addObserver(String genre, User user) {
-        if(!observers.containsKey(genre))
+        if (!observers.containsKey(genre))
             observers.put(genre, new ArrayList<>());
-        if(observers.get(genre).contains(user)) {
+        if (observers.get(genre).contains(user)) {
             Database.getInstance().addErrorOutput();
             return;
         }
@@ -34,11 +35,11 @@ public final class ObservableGenre {
     }
 
     public void notifyObservers(Movie movie) {
-        for(String genre : movie.getGenres()) {
+        for (String genre : movie.getGenres()) {
             System.out.println(genre);
-            if(observers.containsKey(genre)) {
-                for(User user: observers.get(genre)) {
-                    if(!movie.getCountriesBanned().contains(user.getCredentials().getCountry()))
+            if (observers.containsKey(genre)) {
+                for (User user : observers.get(genre)) {
+                    if (!movie.getCountriesBanned().contains(user.getCredentials().getCountry()))
                         user.updateObserver(movie.getName());
                 }
             }

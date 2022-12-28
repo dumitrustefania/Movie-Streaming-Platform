@@ -4,9 +4,7 @@ import platform.database.Database;
 import platform.fileio.ActionInput;
 import platform.observer.ObservableGenre;
 
-import javax.xml.crypto.Data;
-
-public class SubscribeActionStrategy extends ActionStrategy{
+public class SubscribeActionStrategy extends ActionStrategy {
 
     public SubscribeActionStrategy(final ActionInput actionInput) {
         super(actionInput);
@@ -16,8 +14,8 @@ public class SubscribeActionStrategy extends ActionStrategy{
     public void execute() {
         String genre = actionInput.getSubscribedGenre();
 
-        if(!Database.getInstance().getCurrentPage().getAllowedActions().contains("subscribe")
-           || !Database.getInstance().getCurrentMovie().getGenres().contains(genre)) {
+        if (!Database.getInstance().getCurrentPage().getAllowedActions().contains("subscribe")
+                || !Database.getInstance().getCurrentMovie().getGenres().contains(genre)) {
             Database.getInstance().addErrorOutput();
             return;
         }

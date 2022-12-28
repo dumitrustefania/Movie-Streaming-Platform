@@ -13,9 +13,9 @@ public abstract class ActionStrategy {
     }
 
     /**
-     *  This Action abstract class declares the execute() method
-     *  that will be used by the context (represented by the current page)
-     *  to call the algorithm defined by the concrete strategies.
+     * This Action abstract class declares the execute() method
+     * that will be used by the context (represented by the current page)
+     * to call the algorithm defined by the concrete strategies.
      */
     public abstract void execute();
 }
