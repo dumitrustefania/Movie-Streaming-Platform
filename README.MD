@@ -1,7 +1,7 @@
 # MOVIE STREAMING PLATFORM
 
-322CA - Bianca Ștefania Dumitru \
-Object Oriented Programming Project, Stage #1
+322CA - Bianca Ștefania Dumitru
+Object Oriented Programming Project, Stage #2
 
 December 2022
 ----------------------------------------------------------------------------------------------------
@@ -48,10 +48,15 @@ __Packages structure__
 
 - User -> contains basic user information that has to be present in output
 
+- Notification -> contains information about a notification: the movie name
+                  and the message
+
 - Database -> implemented as a Singleton using eager instantiation
            -> stores all the important information about the current state
               of the game: users, movies, current user, current movie(s),
-              current page 
+              current page
+           -> stores the stack of previous pages accessed, used for
+              performing the 'back' operation
        
 - Result -> implemented as a Singleton using eager instantiation
          -> contains an ArrayNode field the stores the output that
@@ -83,6 +88,19 @@ __Packages structure__
                         -> it can create all the ActionStrategy subclasses
                            based on the given input
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+`observable`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- ObservableGenre -> class used for implementing the Observer design pattern
+                  -> implemented using lazy singleton
+                  -> contains a HashMap that stores the users subscribed to
+                     each genre
+                  -> a user is added as observer using the addObserver()
+                     method when a subscribe action is performed
+                  -> each user is notified using the notifyObservers() method
+                     whenever a movie added to the database has one of the genres
+                     he is subscribed to
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ----------------------------------------------------
 How does it work?
 
@@ -111,9 +129,13 @@ How does it work?
 
 Design patterns
 
-* used Singleton for the Database and Result, to have a unique 
-  instance for them and be able to get them wherever needed
+* used Singleton for the Database, Result and ObservableGenre, to have
+  a unique instance for them and be able to get them wherever needed
 
 * used Strategy to create strategies for executing each action
 
 * used Factory to instantiate action Strategies based on the input
+
+* used Observer to be able to easily notify all users subscribed to
+  a genre whenever a movie containing that genre is added to the
+  database

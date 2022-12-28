@@ -13,15 +13,7 @@ public final class Notification {
         return movieName;
     }
 
-    public void setMovieName(final String movieName) {
-        this.movieName = movieName;
-    }
-
     public String getMessage() {
         return message;
-    }
-
-    public void setMessage(final String message) {
-        this.message = message;
     }
 }

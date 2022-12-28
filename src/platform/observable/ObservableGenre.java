@@ -1,4 +1,4 @@
-package platform.observer;
+package platform.observable;
 
 import platform.database.Database;
 import platform.database.Movie;

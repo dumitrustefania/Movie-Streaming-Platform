@@ -3,7 +3,7 @@ package platform.actions;
 import platform.database.Database;
 import platform.database.Movie;
 import platform.fileio.ActionInput;
-import platform.observer.ObservableGenre;
+import platform.observable.ObservableGenre;
 
 public final class AddMovieActionStrategy extends ActionStrategy {
     public AddMovieActionStrategy(final ActionInput actionInput) {

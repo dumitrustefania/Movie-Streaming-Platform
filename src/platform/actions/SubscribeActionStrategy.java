@@ -2,7 +2,7 @@ package platform.actions;
 
 import platform.database.Database;
 import platform.fileio.ActionInput;
-import platform.observer.ObservableGenre;
+import platform.observable.ObservableGenre;
 
 public final class SubscribeActionStrategy extends ActionStrategy {
 
