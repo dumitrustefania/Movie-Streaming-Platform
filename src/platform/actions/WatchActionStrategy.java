@@ -15,10 +15,12 @@ public final class WatchActionStrategy extends ActionStrategy {
         User user = Database.getInstance().getCurrentUser();
         Movie movie = Database.getInstance().getCurrentMovie();
         if (movie != null
-                && user.getPurchasedMovies().contains(movie)) {
+            && user.getPurchasedMovies().contains(movie)) {
             // Add movie to watched movies set of the user.
-            user.getWatchedMovies().add(movie);
-            Database.getInstance().addOutput();
+            if(!user.getWatchedMovies().contains(movie)) {
+                user.getWatchedMovies().add(movie);
+                Database.getInstance().addOutput();
+            }
         } else {
             Database.getInstance().addErrorOutput();
         }

@@ -21,11 +21,20 @@ public final class RateActionStrategy extends ActionStrategy {
                 && movie != null
                 && user.getWatchedMovies().contains(movie)) {
             // Change the movie's rating.
-            movie.setNumRatings(movie.getNumRatings() + 1);
+            if(user.getRateForMovie().containsKey(movie)) {
+                movie.setSumRatings(movie.getSumRatings() - (double) user.getRateForMovie().get(movie));
+            } else {
+                movie.setNumRatings(movie.getNumRatings() + 1);
+            }
+
+            user.getRateForMovie().put(movie, actionInput.getRate());
             movie.setSumRatings(movie.getSumRatings() + (double) actionInput.getRate());
             movie.setRating(movie.getSumRatings() / movie.getNumRatings());
+
             // Add movie to rated movies set of the user.
-            Database.getInstance().getCurrentUser().getRatedMovies().add(movie);
+            if(!user.getRatedMovies().contains(movie))
+                user.getRatedMovies().add(movie);
+
             Database.getInstance().addOutput();
         } else {
             Database.getInstance().addErrorOutput();

@@ -1,7 +1,11 @@
 package platform.actions;
 
 import platform.database.Database;
+import platform.database.Movie;
+import platform.database.User;
 import platform.fileio.ActionInput;
+
+import javax.xml.crypto.Data;
 
 public class DeleteMovieActionStrategy extends ActionStrategy{
     public DeleteMovieActionStrategy(final ActionInput actionInput) {
@@ -10,6 +14,29 @@ public class DeleteMovieActionStrategy extends ActionStrategy{
 
     @Override
     public void execute() {
-        Database.getInstance().getMovies().remove(actionInput.getDeletedMovie());
+        String deletedMovieName = actionInput.getDeletedMovie();
+        Movie deletedMovie = null;
+        for(Movie movie: Database.getInstance().getMovies()) {
+            if(movie.getName().equals(deletedMovieName)) {
+                deletedMovie = movie;
+                break;
+            }
+        }
+
+        for(User user:Database.getInstance().getUsers()) {
+            if(user.getPurchasedMovies().contains(deletedMovie)) {
+                if(user.getCredentials().getAccountType().equals("premium")) {
+                    user.setNumFreePremiumMovies(user.getNumFreePremiumMovies() + 1);
+                } else {
+                    user.setTokensCount(user.getTokensCount() + 2);
+                }
+                user.getPurchasedMovies().remove(deletedMovie);
+            }
+            user.getWatchedMovies().remove(deletedMovie);
+            user.getLikedMovies().remove(deletedMovie);
+            user.getRatedMovies().remove(deletedMovie);
+            Database.getInstance().getCurrentUserMovies().remove(deletedMovie);
+        }
+        Database.getInstance().getMovies().remove(deletedMovie);
     }
 }

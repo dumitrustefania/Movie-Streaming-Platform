@@ -481,7 +481,7 @@
       "rate": 2
     },
     {
-     "type" : "back"
+      "type" : "back"
     },
     {
       "type": "change page",
@@ -502,7 +502,7 @@
       "rate": 2
     },
     {
-     "type" : "back"
+      "type" : "back"
     },
     {
       "type": "change page",
@@ -523,7 +523,7 @@
       "rate": 2
     },
     {
-     "type" : "back"
+      "type" : "back"
     },
     {
       "type": "change page",
@@ -544,7 +544,7 @@
       "rate": 2
     },
     {
-     "type" : "back"
+      "type" : "back"
     },
     {
       "type": "change page",
@@ -565,7 +565,7 @@
       "rate": 2
     },
     {
-     "type" : "back"
+      "type" : "back"
     },
     {
       "type": "change page",
@@ -586,7 +586,7 @@
       "rate": 2
     },
     {
-     "type" : "back"
+      "type" : "back"
     },
     {
       "type": "change page",
@@ -607,7 +607,21 @@
       "rate": 10
     },
     {
-     "type" : "back"
+      "type" : "back"
+    },
+    {
+      "type": "on page",
+      "feature": "buy tokens",
+      "count": "1000"
+    },
+    {
+      "type": "back"
+    },
+    {
+      "type": "back"
+    },
+    {"type": "change page",
+      "page":"movies"
     },
     {
       "type": "change page",
@@ -628,7 +642,7 @@
       "rate": 6
     },
     {
-     "type" : "back"
+      "type" : "back"
     },
     {
       "type": "change page",
@@ -649,7 +663,7 @@
       "rate": 3
     },
     {
-     "type" : "back"
+      "type" : "back"
     },
     {
       "type": "change page",
@@ -670,7 +684,7 @@
       "rate": 5
     },
     {
-     "type" : "back"
+      "type" : "back"
     },
     {
       "type": "change page",
@@ -691,7 +705,7 @@
       "rate": 3
     },
     {
-     "type" : "back"
+      "type" : "back"
     },
     {
       "type": "change page",
@@ -712,7 +726,7 @@
       "rate": 2
     },
     {
-     "type" : "back"
+      "type" : "back"
     },
     {
       "type": "change page",
@@ -733,7 +747,7 @@
       "rate": 1
     },
     {
-     "type" : "back"
+      "type" : "back"
     },
     {
       "type": "change page",
@@ -754,7 +768,7 @@
       "rate": 2
     },
     {
-     "type" : "back"
+      "type" : "back"
     },
     {
       "type": "change page",
@@ -775,7 +789,7 @@
       "rate": 5
     },
     {
-     "type" : "back"
+      "type" : "back"
     },
     {
       "type": "change page",
@@ -796,7 +810,7 @@
       "rate": 4
     },
     {
-     "type" : "back"
+      "type" : "back"
     },
     {
       "type": "change page",
@@ -817,7 +831,7 @@
       "rate": 2
     },
     {
-     "type" : "back"
+      "type" : "back"
     },
     {
       "type": "change page",
@@ -833,7 +847,7 @@
       "feature": "watch"
     },
     {
-     "type" : "back"
+      "type" : "back"
     },
     {
       "type": "on page",

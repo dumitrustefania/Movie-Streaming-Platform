@@ -55,15 +55,14 @@ public class ActionStrategyFactory {
             case "database": {
                 switch (actionInput.getFeature()) {
                     case "add" -> {
-                        return new LoginActionStrategy(actionInput);
+                        return new AddMovieActionStrategy(actionInput);
                     }
                     case "delete" -> {
-                        return new RegisterActionStrategy(actionInput);
+                        return new DeleteMovieActionStrategy(actionInput);
                     }
                     default -> throw new IllegalStateException("Unexpected value");
                 }
             }
-
             default:
                 throw new IllegalStateException("Unexpected value");
         }

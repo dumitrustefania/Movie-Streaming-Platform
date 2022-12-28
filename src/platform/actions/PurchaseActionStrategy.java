@@ -13,9 +13,9 @@ public final class PurchaseActionStrategy extends ActionStrategy {
     @Override
     public void execute() {
         Movie movie = Database.getInstance().getCurrentMovie();
+        User user = Database.getInstance().getCurrentUser();
 
-        if (movie != null) {
-            User user = Database.getInstance().getCurrentUser();
+        if (movie != null && !user.getPurchasedMovies().contains(movie)) {
             /* Try to purchase movie for free if user is premium and
                still has free movies left to buy. If that is not possible
                or user si standard, pay 2 tokens for a movie. */

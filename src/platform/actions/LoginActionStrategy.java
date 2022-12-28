@@ -17,10 +17,11 @@ public final class LoginActionStrategy extends ActionStrategy {
     @Override
     public void execute() {
         ArrayList<User> users = Database.getInstance().getUsers();
-
+        System.out.println(actionInput.getCredentials().getName()+ actionInput.getCredentials().getPassword());
         // Check whether user with given credentials exists in the database.
         for (User user : users) {
             Credentials credentials = user.getCredentials();
+
             if (credentials.getName().equals(actionInput.getCredentials().getName())
                     && credentials.getPassword().equals(
                             actionInput.getCredentials().getPassword())) {

@@ -41,10 +41,11 @@ public final class ChangePageActionStrategy extends ActionStrategy {
                appearing on screen. If yes, set it as the current movie and create a new
                see details page. If not, remain on the same page and add error output.*/
             case "see details" -> {
+                System.out.println(Database.getInstance().getCurrentUser().getCredentials().getName() + actionInput.getMovie());
                 for (Movie movie : Database.getInstance().getCurrentUserMovies()) {
                     if (movie.getName().equals(actionInput.getMovie())) {
                         Database.getInstance().setCurrentUserMovies(
-                                new ArrayList<Movie>(List.of(movie)));
+                                new ArrayList<>(List.of(movie)));
                         Database.getInstance().setCurrentMovie(movie);
                         Database.getInstance().addOutput();
                         Database.getInstance().setCurrentPage(new SeeDetailsPage());
@@ -55,6 +56,7 @@ public final class ChangePageActionStrategy extends ActionStrategy {
             }
             // Create new upgrades page.
             case "upgrades" -> Database.getInstance().setCurrentPage(new UpgradesPage());
+            case "authenticated homepage" -> Database.getInstance().setCurrentPage(new AuthenticatedHomepage());
             default -> throw new IllegalStateException("Unexpected value");
         }
     }

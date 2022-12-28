@@ -15,7 +15,7 @@ public final class ActionInput {
     private FilterInput filters;
     private String subscribedGenre;
     private Movie addedMovie;
-    private Movie deletedMovie;
+    private String deletedMovie;
 
     public int getRate() {
         return rate;
@@ -61,7 +61,11 @@ public final class ActionInput {
         return addedMovie;
     }
 
-    public Movie getDeletedMovie() {
+    public String getDeletedMovie() {
         return deletedMovie;
+    }
+
+    public void setPage(String page) {
+        this.page = page;
     }
 }

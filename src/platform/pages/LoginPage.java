@@ -7,7 +7,7 @@ import java.util.List;
 
 public final class LoginPage extends Page {
     public LoginPage() {
-        Database.getInstance().getHistory().add(this);
+        this.name = "login";
         this.allowedActions = new ArrayList<String>(List.of("login"));
         this.allowedNextPages = new ArrayList<String>(List.of("login"));
     }

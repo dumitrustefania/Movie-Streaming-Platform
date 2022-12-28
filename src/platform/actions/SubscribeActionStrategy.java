@@ -2,6 +2,7 @@ package platform.actions;
 
 import platform.database.Database;
 import platform.fileio.ActionInput;
+import platform.observer.ObservableGenre;
 
 import javax.xml.crypto.Data;
 
@@ -21,7 +22,6 @@ public class SubscribeActionStrategy extends ActionStrategy{
             return;
         }
 
-
-
+        ObservableGenre.getInstance().addObserver(genre, Database.getInstance().getCurrentUser());
     }
 }

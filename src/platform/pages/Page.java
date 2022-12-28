@@ -5,6 +5,7 @@ import platform.actions.ActionStrategy;
 import java.util.ArrayList;
 
 public abstract class Page {
+    protected String name;
     /**
      * Strings array containing all actions that can be executed
      * while being on a subclass page.
@@ -31,5 +32,9 @@ public abstract class Page {
 
     public final ArrayList<String> getAllowedNextPages() {
         return allowedNextPages;
+    }
+
+    public String getName() {
+        return name;
     }
 }

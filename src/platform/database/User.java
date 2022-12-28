@@ -1,6 +1,9 @@
 package platform.database;
 
-import java.util.ArrayList;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public final class User {
     private Credentials credentials;
@@ -11,7 +14,69 @@ public final class User {
     private ArrayList<Movie> watchedMovies = new ArrayList<Movie>();
     private ArrayList<Movie> likedMovies = new ArrayList<Movie>();
     private ArrayList<Movie> ratedMovies = new ArrayList<Movie>();
+    private ArrayList<Notification> notifications = new ArrayList<>();
+    @JsonIgnore
+    private HashMap<Movie, Integer> rateForMovie = new HashMap<>();
 
+    public void updateObserver(String movieName) {
+        for(Notification notification : notifications) {
+            if(notification.getMovieName().equals(movieName))
+                return;
+        }
+
+        notifications.add(new Notification(movieName, "ADD"));
+    }
+
+    public void createRecommendation() {
+        HashMap<String, Integer> likedGenres = new HashMap<>();
+        for(Movie movie : likedMovies) {
+            for(String genre : movie.getGenres()) {
+                if(!likedGenres.containsKey(genre))
+                    likedGenres.put(genre, 1);
+                else
+                    likedGenres.put(genre, likedGenres.get(genre) + 1);
+            }
+        }
+
+        ArrayList<Map.Entry<String, Integer>> likedGenresList = new ArrayList<>(likedGenres.entrySet());
+
+        // Sort the Arraylist using a custom comparator.
+        likedGenresList.sort((o1, o2) -> {
+            if (Objects.equals(o1.getValue(), o2.getValue())) {
+                String key1 = o1.getKey();
+                String key2 = o2.getKey();
+                return key1.compareTo(key2);
+            }
+
+            return Integer.compare(o1.getValue(), o2.getValue());
+        });
+        System.out.println("lista genurilor" + likedGenresList);
+
+        Database.getInstance().getAllowedMovies();
+        Database.getInstance().getCurrentUserMovies().sort(((o1, o2) -> Integer.compare(o2.getNumLikes(), o1.getNumLikes())));
+
+        AtomicBoolean foundRecommendation = new AtomicBoolean(false);
+        likedGenresList.forEach(entry -> {
+            if(!foundRecommendation.get()) {
+                for(Movie movie : Database.getInstance().getCurrentUserMovies()) {
+                    if(!watchedMovies.contains(movie) && !foundRecommendation.get()) {
+                        for(String genre : movie.getGenres()) {
+                            if(genre.equals(entry.getKey())) {
+                                notifications.add(new Notification(movie.getName(), "Recommendation"));
+                                foundRecommendation.set(true);
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        if(!foundRecommendation.get()) {
+            notifications.add(new Notification("No recommendation", "Recommendation"));
+        }
+        Database.getInstance().setCurrentUserMovies(null);
+        Database.getInstance().addOutput();
+    }
     public User(final Credentials credentials) {
         this.credentials = credentials;
     }
@@ -73,5 +138,21 @@ public final class User {
 
     public void setCredentials(final Credentials credentials) {
         this.credentials = credentials;
+    }
+
+    public ArrayList<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(ArrayList<Notification> notifications) {
+        this.notifications = notifications;
+    }
+
+    public HashMap<Movie, Integer> getRateForMovie() {
+        return rateForMovie;
+    }
+
+    public void setRateForMovie(HashMap<Movie, Integer> rateForMovie) {
+        this.rateForMovie = rateForMovie;
     }
 }
