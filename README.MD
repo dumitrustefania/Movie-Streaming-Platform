@@ -1,8 +1,5 @@
 # MOVIE STREAMING PLATFORM
 
-322CA - Bianca Ștefania Dumitru
-Object Oriented Programming Project, Stage #2
-
 December 2022
 ----------------------------------------------------------------------------------------------------
 
